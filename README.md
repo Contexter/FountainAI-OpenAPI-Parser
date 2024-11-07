@@ -2,6 +2,8 @@
 
 **Repository**: [FountainAI-OpenAPI-Parser](https://github.com/Contexter/FountainAI-OpenAPI-Parser)
 
+![FountainAI-Parser](https://github.com/Contexter/FountainAI-OpenAPI-Parser/blob/main/Parser-Illustration.png)
+
 ## Overview
 
 The **FountainAI OpenAPI Parser** aims to develop a **general-purpose, comprehensive OpenAPI 3.1 parser** for Python. The goal is to create a robust, feature-rich library for parsing, validating, and manipulating OpenAPI specifications programmatically, ensuring seamless integration with the broader FountainAI system.
