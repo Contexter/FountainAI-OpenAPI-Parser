@@ -62,57 +62,32 @@ Leveraging **GPT-4** for code generation is particularly advantageous for creati
 The following requirements are crucial for the development of the parser:
 
 1. **Specification Compliance**: Strict adherence to the **OpenAPI 3.1 specification** with support for **JSON Schema 2020-12**.
-
 2. **Comprehensive Reference Resolution**:
    - Full support for **local and remote `$ref` pointers**.
    - Handle nested and circular references to produce a unified specification.
-
 3. **Granular Validation and Error Reporting**:
    - Validate OpenAPI documents for compliance with OpenAPI 3.1.
    - Provide **detailed, actionable error messages** to help developers resolve issues efficiently.
-
 4. **Extensibility and Modularity**:
    - Design a **modular architecture** with independent components that integrate easily.
    - Ensure that the output is structured for further manipulation by developers.
-
 5. **Serialization**:
    - Ability to **serialize parsed OpenAPI objects back to YAML or JSON** for easy modifications and republishing.
-
 6. **Pythonic Design**:
    - Utilize **dataclasses** and other Python 3 features to create an intuitive, easy-to-use interface for interacting with parsed OpenAPI documents.
-
 7. **Integration with FountainAI**:
    - The parser must be designed to integrate seamlessly with other FountainAI microservices, simplifying workflows for OpenAPI generation, validation, and deployment.
-
 8. **Pip Installable**:
    - Publish the library on **PyPI** for easy installation using `pip`:
      ```sh
      pip install fountainai-openapi-parser
      ```
 
-## Implementation Prompt for GPT-4
+## Implementation Prompt
 
-To implement the FountainAI OpenAPI Parser using **GPT-4 Canvas**, we need to focus on a comprehensive approach that covers all core components:
+The implementation prompt has been moved to a separate document. For the detailed prompting sequence used to create the FountainAI OpenAPI Parser, please refer to the following link:
 
----
-
-**Implementation Prompt**:
-
-"We aim to build a **general-purpose, comprehensive OpenAPI 3.1 parser** as a Python library. The parser should achieve **full OpenAPI 3.1 compliance**, including support for **JSON Schema 2020-12**. It should provide a **modular, extensible, and easy-to-use API** for interacting with OpenAPI specifications. Key features include **handling `$ref` pointers** (both local and remote), **validation** against the official OpenAPI 3.1 schema, and **detailed error messages**. The implementation should use **Python dataclasses** for modeling OpenAPI components, offer **serialization** to YAML/JSON, and provide **granular validation** to help users identify problematic parts of the OpenAPI document.
-
-The core features are:
-1. **Loading and Parsing**: Load OpenAPI files (JSON and YAML) and parse them into Pythonic data models.
-2. **Validation**: Validate the OpenAPI document against the OpenAPI 3.1 schema, with detailed error messages.
-3. **Reference Resolution**: Handle local and remote `$ref` pointers, including complex nested references.
-4. **Data Modeling**: Use **dataclasses** to represent key components like `Info`, `Paths`, `Components`, etc.
-5. **Extensibility**: Ensure easy extension for new features and evolving use cases.
-6. **Serialization**: Convert parsed objects back to YAML or JSON.
-7. **Integration**: Fit the parser into the **FountainAI** microservice architecture.
-8. **Documentation**: Provide clear documentation and examples.
-
-Begin with setting up the basic scaffolding for the library, including **dataclass models** for core OpenAPI components and helper methods for parsing YAML/JSON."
-
----
+[Comprehensive Prompting Sequence for Creating FountainAI OpenAPI Parser Project](https://github.com/Contexter/FountainAI-OpenAPI-Parser/blob/main/Comprehensive%20Prompting%20Sequence%20for%20Creating%20FountainAI%20OpenAPI%20Parser%20Project.md)
 
 ## Next Steps
 
@@ -129,4 +104,3 @@ Feel free to contribute by raising issues or suggesting improvements through Git
 ## License
 
 This project is licensed under the **MIT License** - see the `LICENSE` file for more details.
-
