@@ -1,3 +1,4 @@
+
 # OpenAPI Component Generators Implementation Plan
 
 This document provides a step-by-step guide for implementing each component generator in the `models_generator` directory. Following this plan will ensure each generator is implemented systematically, with each OpenAPI component represented as a Python dataclass.
@@ -6,14 +7,15 @@ This document provides a step-by-step guide for implementing each component gene
 
 1. [Overview](#overview)
 2. [Automation Strategy for Generator Updates](#automation-strategy-for-generator-updates)
-3. [Batch Implementation Plan](#batch-implementation-plan)
+3. [Requirements for Future Batch Update Scripts](#requirements-for-future-batch-update-scripts)
+4. [Batch Implementation Plan](#batch-implementation-plan)
    - [Batch 1: Basic Components](#batch-1-basic-components)
    - [Batch 2: Linking and Structure Components](#batch-2-linking-and-structure-components)
    - [Batch 3: Schema and Security Components](#batch-3-schema-and-security-components)
    - [Batch 4: Path, Parameter, and Reference Components](#batch-4-path-parameter-and-reference-components)
    - [Batch 5: Security, Server, and Tag Components](#batch-5-security-server-and-tag-components)
    - [Batch 6: Final Components](#batch-6-final-components)
-4. [Testing and Validation](#testing-and-validation)
+5. [Testing and Validation](#testing-and-validation)
 
 ---
 
@@ -43,6 +45,45 @@ To efficiently maintain each generator script in alignment with the OpenAPI 3.1 
    - The batch update scripts would then read from this file to ensure consistency and avoid redundancy.
 
 This automation strategy ensures that all generator scripts in the `models_generator` directory can be updated in a structured, automated manner, reflecting the latest OpenAPI specifications.
+
+---
+
+## Requirements for Future Batch Update Scripts
+
+To ensure consistency, maintainability, and reliability, each future `batch_x_update.py` script should adhere to the following requirements:
+
+1. **Logging Configuration**:
+   - Log all informational and error messages to a specified log file.
+   - Allow the log file path to be configurable using an argument (e.g., `--log-file`), making it adaptable for various environments.
+   - Set up logging to overwrite the log file on each run, or allow optional appending as needed.
+
+2. **Dry-Run Mode**:
+   - Implement a `--dry-run` option, which, when enabled, outputs intended changes to the console without actually writing to any files.
+   - In dry-run mode, log the actions and print the generated content to allow review without making changes.
+
+3. **Directory Validation**:
+   - Ensure the `models_generator` directory exists before attempting to create or modify files within it.
+   - Automatically create the directory if it is missing.
+
+4. **Dynamic Import Management**:
+   - Automatically include necessary imports based on the fields in each model.
+   - Specifically check for types like `Optional` and `List` and add the appropriate imports (`from typing import Optional`, `from typing import List`) only if needed by the model’s fields.
+
+5. **File Backup Before Overwrite**:
+   - Before overwriting an existing generator script, create a backup by appending a `.bak` extension to the original file.
+   - Log each backup creation, so the operation is traceable.
+
+6. **Structured Content Generation Using a Template**:
+   - Use a centralized template for generating the content of each generator script, allowing for easy updates and consistency across all batch scripts.
+   - Format field definitions dynamically within the template, handling optional defaults as needed.
+
+7. **Error Handling with Logging**:
+   - Wrap file operations in try-except blocks and log any exceptions encountered to avoid silent failures.
+   - Log errors with `logging.error` to make troubleshooting easier.
+
+8. **Execution Summary**:
+   - Log a completion message at the end of each script’s execution, summarizing whether the batch update was successful or if any errors occurred.
+   - This summary provides quick feedback on the script’s outcome.
 
 ---
 
