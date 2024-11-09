@@ -6,8 +6,7 @@ from generate_common_imports import *
 def generate_model():
     return '''
 @dataclass
-class Webhook:
-    event: str
-    callbackUrl: str
+class ExternalDocumentation:
+    url: str
     description: Optional[str] = None
 '''

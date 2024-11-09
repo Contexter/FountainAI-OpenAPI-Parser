@@ -7,10 +7,8 @@ from generate_common_imports import *
 def generate_model():
     return '''
 @dataclass
-class Link:
-    operationId: Optional[str] = None
-    parameters: Optional[Dict[str, str]] = None
-    requestBody: Optional[str] = None
+class RequestBody:
     description: Optional[str] = None
-    server: Optional['Server'] = None
+    content: Dict[str, 'MediaType']
+    required: Optional[bool] = None
 '''

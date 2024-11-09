@@ -1,0 +1,9 @@
+2024-11-09 18:00:00,845 - INFO - Backed up /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_link.py to /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_link.py.bak
+2024-11-09 18:00:00,845 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_link.py with final content for Link
+2024-11-09 18:00:00,845 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_mediatype.py with final content for MediaType
+2024-11-09 18:00:00,845 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_oauthflows.py with final content for OAuthFlows
+2024-11-09 18:00:00,845 - INFO - Backed up /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_openapi.py to /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_openapi.py.bak
+2024-11-09 18:00:00,845 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_openapi.py with final content for OpenAPI
+2024-11-09 18:00:00,846 - INFO - Backed up /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_operation.py to /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_operation.py.bak
+2024-11-09 18:00:00,846 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_operation.py with final content for Operation
+2024-11-09 18:00:00,846 - INFO - Batch 3 update completed successfully.

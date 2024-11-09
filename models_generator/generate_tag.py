@@ -1,9 +1,13 @@
+from dataclasses import dataclass
+from typing import Optional
+
 from generate_common_imports import *
 
 def generate_model():
     return '''
 @dataclass
 class Tag:
-    # Define fields based on OpenAPI 3.1 specification
-    pass
+    name: str
+    description: Optional[str] = None
+    externalDocs: Optional['ExternalDocumentation'] = None
 '''
