@@ -87,7 +87,7 @@ The following requirements are crucial for the development of the parser:
 
 The implementation prompt has been moved to a separate document. For the detailed prompting sequence used to create the FountainAI OpenAPI Parser, please refer to the following link:
 
-[Comprehensive Prompting Sequence for Creating FountainAI OpenAPI Parser Project](https://github.com/Contexter/FountainAI-OpenAPI-Parser/blob/main/Comprehensive%20Prompting%20Sequence%20for%20Creating%20FountainAI%20OpenAPI%20Parser%20Project.md)
+[Comprehensive Prompting Sequence for Creating FountainAI OpenAPI Parser Project](https://github.com/Contexter/FountainAI-OpenAPI-Parser/tree/main/Prompts/Prompts)
 
 ## Next Steps
 
