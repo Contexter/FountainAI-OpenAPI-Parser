@@ -1,9 +1,0 @@
-2024-11-09 18:02:24,780 - INFO - Backed up /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_parameter.py to /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_parameter.py.bak
-2024-11-09 18:02:24,780 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_parameter.py with final content for Parameter
-2024-11-09 18:02:24,780 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_pathitem.py with final content for PathItem
-2024-11-09 18:02:24,781 - INFO - Backed up /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_reference.py to /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_reference.py.bak
-2024-11-09 18:02:24,781 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_reference.py with final content for Reference
-2024-11-09 18:02:24,781 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_requestbody.py with final content for RequestBody
-2024-11-09 18:02:24,781 - INFO - Backed up /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_response.py to /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_response.py.bak
-2024-11-09 18:02:24,782 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_response.py with final content for Response
-2024-11-09 18:02:24,782 - INFO - Batch 4 update completed successfully.

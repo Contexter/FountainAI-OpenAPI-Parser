@@ -1,8 +1,0 @@
-2024-11-09 18:04:02,075 - INFO - Backed up /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_schema.py to /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_schema.py.bak
-2024-11-09 18:04:02,075 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_schema.py with final content for Schema
-2024-11-09 18:04:02,076 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_securityrequirement.py with final content for SecurityRequirement
-2024-11-09 18:04:02,076 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_securityscheme.py with final content for SecurityScheme
-2024-11-09 18:04:02,076 - INFO - Backed up /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_server.py to /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_server.py.bak
-2024-11-09 18:04:02,076 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_server.py with final content for Server
-2024-11-09 18:04:02,076 - INFO - Updated /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/generate_servervariable.py with final content for ServerVariable
-2024-11-09 18:04:02,076 - INFO - Batch 5 update completed successfully.
