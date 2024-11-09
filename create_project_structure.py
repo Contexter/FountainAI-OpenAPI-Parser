@@ -1,5 +1,6 @@
 from pathlib import Path
 import logging
+import shutil
 
 logging.basicConfig(level=logging.INFO)
 
@@ -24,15 +25,18 @@ def create_project_structure():
         ]
     }
 
-    scripts_directory = Path('scripts')
-    scripts_directory.mkdir(parents=True, exist_ok=True)
-    logging.info(f"Created scripts directory at {scripts_directory}")
-
     for directory, files in project_structure.items():
-        Path(directory).mkdir(parents=True, exist_ok=True)
-        logging.info(f"Created directory: {directory}")
+        dir_path = Path(directory) if directory else Path('.')
+        if dir_path.exists() and dir_path.is_dir() and directory:
+            logging.info(f"Removing existing directory: {dir_path}")
+            shutil.rmtree(dir_path)
+        dir_path.mkdir(parents=True, exist_ok=True)
+        logging.info(f"Created directory: {dir_path}")
         for file_name in files:
-            file_path = Path(directory) / file_name
+            file_path = dir_path / file_name
+            if file_path.exists():
+                logging.info(f"Removing existing file: {file_path}")
+                file_path.unlink()
             try:
                 with file_path.open('w') as f:
                     f.write(get_boilerplate_content(file_name))
