@@ -1,0 +1,9 @@
+2024-11-09 18:23:05,682 - INFO - File not found, skipping: /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/models_generator/generate_externaldocumentation.py
+2024-11-09 18:23:05,682 - INFO - File not found, skipping: /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/models_generator/generate_mediatype.py
+2024-11-09 18:23:05,682 - INFO - File not found, skipping: /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/models_generator/generate_oauthflows.py
+2024-11-09 18:23:05,682 - INFO - File not found, skipping: /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/models_generator/generate_pathitem.py
+2024-11-09 18:23:05,682 - INFO - File not found, skipping: /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/models_generator/generate_requestbody.py
+2024-11-09 18:23:05,682 - INFO - File not found, skipping: /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/models_generator/generate_securityrequirement.py
+2024-11-09 18:23:05,682 - INFO - File not found, skipping: /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/models_generator/generate_securityscheme.py
+2024-11-09 18:23:05,682 - INFO - File not found, skipping: /Users/benedikteickhoff/Development/Github-Desktop/FountainAI-OpenAPI-Parser/models_generator/models_generator/generate_servervariable.py
+2024-11-09 18:23:05,682 - INFO - Duplicate file cleanup complete.
