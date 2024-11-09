@@ -1,4 +1,5 @@
 # Comprehensive Prompting Sequence for Creating FountainAI OpenAPI Parser Project
+> Initial DRAFT (Iteration 1)
 
 This documentation provides a step-by-step guide for generating all necessary components of the FountainAI OpenAPI Parser project using prompt-driven script creation. Each step is designed to automate the process of building a high-quality, modular Python library that adheres to best practices for maintainability and extensibility.
 
