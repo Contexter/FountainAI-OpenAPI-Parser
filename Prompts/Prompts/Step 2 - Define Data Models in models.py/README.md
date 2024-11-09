@@ -1,66 +1,76 @@
-# Step 2 - Refined Prompt for Modularizing Data Model Generation
-> Iteration 2
+# Step 2 - Comprehensive Prompt for Creating Data Models in `models.py`
+> Iteration 3
 
 ## Prompt
 
-Create a set of scripts to modularize the generation of data models for OpenAPI components in Python using dataclasses. Each script should generate specific data models as follows:
+Create a single Python file, `models.py`, that defines comprehensive data models for all OpenAPI 3.1 components using Python dataclasses. This file should fully represent each component, with no placeholders or incomplete definitions.
 
-### Directory Structure
-- Create a new directory called `models_generator` at the root of the repository.
-- Place all component-specific scripts, as well as the main orchestration script, within this directory to keep the library structure organized.
+### Requirements
 
-### Main Orchestration Script (`models_generator/generate_models.py`):
-- Acts as an orchestrator that imports functions from individual model-generating scripts.
-- Calls functions to combine all models into a single `models.py` file.
-- Once all the models are generated, compress the `models_generator` directory into a `.zip` file for easy distribution or download.
+1. **Dataclass Structure**: Define each OpenAPI component as a standalone Python dataclass. Import all necessary types, including `Optional`, `List`, `Dict`, `Any`, and `Union` at the top of `models.py`.
 
-### Individual Scripts for Core Components:
-- Each OpenAPI component should have its own script within the `models_generator` directory (e.g., `generate_contact.py`, `generate_license.py`).
-- Each script should:
-  - Define a function that returns a string representation of the dataclass for its specific component.
-  - Follow OpenAPI 3.1 specifications to ensure fields are correctly defined.
-  - Use `Optional` and `field(default_factory=...)` where necessary for correct defaults.
-  - Ensure adherence to type validation in line with the OpenAPI schema.
+2. **Component Fields**:
+   - **Required Fields**: Implement all mandatory fields as specified in OpenAPI 3.1.
+   - **Optional Fields**: Use `Optional` for fields that are not required, with default values set to `None`.
+   - **Nested References**: For fields referencing other components, use type hints with forward references where necessary (e.g., `Optional['Schema']`).
 
-### Comprehensive List of Component Scripts:
-1. **Contact** - `models_generator/generate_contact.py`: Generates the `Contact` dataclass model.
-2. **License** - `models_generator/generate_license.py`: Generates the `License` dataclass model.
-3. **Info** - `models_generator/generate_info.py`: Generates the `Info` dataclass model.
-4. **ServerVariable** - `models_generator/generate_server_variable.py`: Generates the `ServerVariable` dataclass model.
-5. **Server** - `models_generator/generate_server.py`: Generates the `Server` dataclass model.
-6. **Tag** - `models_generator/generate_tag.py`: Generates the `Tag` dataclass model.
-7. **ExternalDocumentation** - `models_generator/generate_external_documentation.py`: Generates the `ExternalDocumentation` dataclass model.
-8. **Reference** - `models_generator/generate_reference.py`: Generates the `Reference` dataclass model.
-9. **XML** - `models_generator/generate_xml.py`: Generates the `XML` dataclass model.
-10. **Discriminator** - `models_generator/generate_discriminator.py`: Generates the `Discriminator` dataclass model.
-11. **Encoding** - `models_generator/generate_encoding.py`: Generates the `Encoding` dataclass model.
-12. **MediaType** - `models_generator/generate_media_type.py`: Generates the `MediaType` dataclass model.
-13. **Example** - `models_generator/generate_example.py`: Generates the `Example` dataclass model.
-14. **Schema** - `models_generator/generate_schema.py`: Generates the `Schema` dataclass model, including comprehensive JSON Schema Draft 2019-09 fields.
-15. **Parameter** - `models_generator/generate_parameter.py`: Generates the `Parameter` dataclass model.
-16. **RequestBody** - `models_generator/generate_request_body.py`: Generates the `RequestBody` dataclass model.
-17. **Response** - `models_generator/generate_response.py`: Generates the `Response` dataclass model.
-18. **Link** - `models_generator/generate_link.py`: Generates the `Link` dataclass model.
-19. **Header** - `models_generator/generate_header.py`: Generates the `Header` dataclass model.
-20. **Callback** - `models_generator/generate_callback.py`: Generates the `Callback` dataclass model.
-21. **SecurityScheme** - `models_generator/generate_security_scheme.py`: Generates the `SecurityScheme` dataclass model, including different security scheme types.
-22. **OAuthFlows** - `models_generator/generate_oauth_flows.py`: Generates the `OAuthFlows` dataclass model, covering all OAuth flow types.
-23. **Operation** - `models_generator/generate_operation.py`: Generates the `Operation` dataclass model.
-24. **PathItem** - `models_generator/generate_path_item.py`: Generates the `PathItem` dataclass model.
-25. **Components** - `models_generator/generate_components.py`: Generates the `Components` dataclass model.
-26. **SecurityRequirement** - `models_generator/generate_security_requirement.py`: Generates the `SecurityRequirement` dataclass model.
-27. **Webhook** - `models_generator/generate_webhook.py`: Generates the `Webhook` dataclass model.
-28. **OpenAPI** - `models_generator/generate_openapi.py`: Generates the `OpenAPI` dataclass model, orchestrating all other components.
+3. **Components to Implement**:
+   Define each of the following components as fully detailed dataclasses with fields adhering to OpenAPI 3.1 specifications:
+   - `Contact`, `License`, `Info`, `ServerVariable`, `Server`, `Tag`, `ExternalDocumentation`, `Reference`, `XML`, `Discriminator`, `Encoding`, `MediaType`, `Example`, `Schema`, `Parameter`, `RequestBody`, `Response`, `Link`, `Header`, `Callback`, `SecurityScheme`, `OAuthFlows`, `Operation`, `PathItem`, `Components`, `SecurityRequirement`, `Webhook`, and `OpenAPI`.
 
-### Reusable Imports Script
-1. **Common Typing Imports** - `models_generator/generate_common_imports.py`: Provides reusable imports such as `Optional`, `List`, `Dict`, `Any`, and `Union` to avoid redundancy across scripts.
+4. **Accurate Type Definitions**:
+   - **Enums**: Use Python’s `Enum` class for fields that accept a set of predefined values.
+   - **Dictionaries and Lists**: Implement dictionary and list fields exactly as defined in OpenAPI 3.1.
+   - **Boolean Defaults**: Default boolean fields to `False` if required.
 
-### Goal of Modularization
-- **Maintainability**: Each OpenAPI component is defined in its own module, making updates and maintenance easier.
-- **Comprehensive Coverage**: By breaking down into individual components, we ensure all OpenAPI 3.1 features are covered thoroughly.
-- **Reusability**: Components can be reused or extended independently, providing flexibility for future versions or custom extensions.
-- **Distribution**: After generating all the necessary components, compress the `models_generator` directory into a `.zip` file for easy sharing and downloading.
+5. **Example Content**:
+   - Provide example values or docstrings at the class level, illustrating the instantiation of each component with realistic OpenAPI data.
 
-### How to Make the Generated Models Available for Download
-- After all models have been generated, create a Python script to compress the `models_generator` directory into a `.zip` file.
-- Provide the `.zip` file as a downloadable link so that users can easily access all generated files.
+6. **Testing and Validation**:
+   - Ensure each model allows realistic OpenAPI content, validating that all fields, types, and formats align with OpenAPI 3.1 requirements.
+   - The final `models.py` should contain no placeholder comments or unimplemented fields.
+
+### Expected Output for Each Component
+
+The following is an example of the expected structure for each dataclass:
+
+```python
+from typing import Optional, List, Dict, Any, Union
+from dataclasses import dataclass
+
+@dataclass
+class Contact:
+    name: Optional[str] = None
+    url: Optional[str] = None
+    email: Optional[str] = None
+
+@dataclass
+class ServerVariable:
+    enum: Optional[List[str]] = None
+    default: str
+    description: Optional[str] = None
+
+@dataclass
+class Server:
+    url: str
+    description: Optional[str] = None
+    variables: Optional[Dict[str, ServerVariable]] = None
+```
+
+This structure should be applied comprehensively for each component in the list, ensuring every detail is covered based on the OpenAPI 3.1 specification.
+
+### Modularization
+
+1. **Directory Setup**: Organize all component generator scripts within a `models_generator` directory.
+2. **Orchestration Script**: Use a main script, `generate_models.py`, to combine these individual component scripts into a final, fully-implemented `models.py`.
+3. **Reusable Imports**: Include a `generate_common_imports.py` for shared imports, such as `Optional`, `List`, `Dict`, `Any`, and `Union`.
+
+### Goals of the Model Generation
+
+- **Maintainability**: Each component is modularized, allowing updates to specific components without modifying the entire file.
+- **Comprehensive Coverage**: Ensure that every OpenAPI 3.1 feature is thoroughly covered in `models.py`.
+- **Distribution**: Compress `models_generator` into a `.zip` file to provide easy access to all generated models.
+
+---
+
+This updated prompt now clearly defines a step-by-step approach for producing a complete and accurate `models.py` that adheres to OpenAPI 3.1, leaving no room for partial implementations or placeholders.
