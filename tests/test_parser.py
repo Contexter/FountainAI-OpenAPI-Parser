@@ -73,7 +73,9 @@ class TestParser(unittest.TestCase):
         try:
             result = parse_openapi(self.openapi_with_ref)
             self.assertIsNotNone(result)
-            self.assertEqual(result.paths['/example'].get.responses['200'].content['application/json'].schema.type, "object")
+            self.assertEqual(
+                result.paths['/example'].get.responses['200'].content['application/json'].schema.type, "object"
+            )
         except ReferenceResolutionError as e:
             self.fail(f"Reference resolution failed unexpectedly: {e}")
 
