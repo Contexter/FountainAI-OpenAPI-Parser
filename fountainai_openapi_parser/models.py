@@ -1,15 +1,15 @@
 from typing import Optional, List, Dict, Any, Union
-from dataclasses import dataclass
+from pydantic import BaseModel, Field, AnyUrl, EmailStr
 from enum import Enum
 
 # Define Enums for fields that use predefined values
-class ParameterLocation(Enum):
+class ParameterLocation(str, Enum):
     QUERY = "query"
     HEADER = "header"
     PATH = "path"
     COOKIE = "cookie"
 
-class Style(Enum):
+class Style(str, Enum):
     MATRIX = "matrix"
     LABEL = "label"
     FORM = "form"
@@ -18,7 +18,7 @@ class Style(Enum):
     PIPE_DELIMITED = "pipeDelimited"
     DEEP_OBJECT = "deepObject"
 
-class SecuritySchemeType(Enum):
+class SecuritySchemeType(str, Enum):
     API_KEY = "apiKey"
     HTTP = "http"
     MUTUAL_TLS = "mutualTLS"
@@ -26,81 +26,73 @@ class SecuritySchemeType(Enum):
     OPENID_CONNECT = "openIdConnect"
 
 # Contact information for the exposed API
-@dataclass
-class Contact:
+class Contact(BaseModel):
     name: Optional[str] = None
-    url: Optional[str] = None
-    email: Optional[str] = None
+    url: Optional[AnyUrl] = None
+    email: Optional[EmailStr] = None
 
 # License information for the exposed API
-@dataclass
-class License:
+class License(BaseModel):
     name: str
-    identifier: Optional[str] = None  # Added 'identifier' field
-    url: Optional[str] = None
+    identifier: Optional[str] = None
+    url: Optional[AnyUrl] = None
 
 # General information about the API
-@dataclass
-class Info:
+class Info(BaseModel):
     title: str
     description: Optional[str] = None
-    termsOfService: Optional[str] = None
+    termsOfService: Optional[AnyUrl] = None
     contact: Optional[Contact] = None
     license: Optional[License] = None
     version: str
 
 # Variable substitutions for server URL template
-@dataclass
-class ServerVariable:
+class ServerVariable(BaseModel):
     enum: Optional[List[str]] = None
     default: str
     description: Optional[str] = None
 
 # An object representing a Server
-@dataclass
-class Server:
+class Server(BaseModel):
     url: str
     description: Optional[str] = None
     variables: Optional[Dict[str, ServerVariable]] = None
 
 # Additional external documentation
-@dataclass
-class ExternalDocumentation:
+class ExternalDocumentation(BaseModel):
     description: Optional[str] = None
-    url: str
+    url: AnyUrl
 
 # Allows adding meta-data to a single tag
-@dataclass
-class Tag:
+class Tag(BaseModel):
     name: str
     description: Optional[str] = None
-    externalDocs: Optional[ExternalDocumentation] = None
+    externalDocs: Optional['ExternalDocumentation'] = None  # Forward reference
 
 # A simple object to allow referencing other components
-@dataclass
-class Reference:
-    ref: str  # Corresponds to $ref
-    summary: Optional[str] = None  # Added 'summary' field
-    description: Optional[str] = None  # Added 'description' field
+class Reference(BaseModel):
+    ref: str = Field(..., alias='$ref')
+    summary: Optional[str] = None
+    description: Optional[str] = None
+
+    class Config:
+        allow_population_by_field_name = True
 
 # A metadata object that allows for more fine-tuned XML model definitions
-@dataclass
-class XML:
+class XML(BaseModel):
     name: Optional[str] = None
-    namespace: Optional[str] = None
+    namespace: Optional[AnyUrl] = None
     prefix: Optional[str] = None
     attribute: Optional[bool] = None
     wrapped: Optional[bool] = None
 
 # Adds support for polymorphism and inheritance
-@dataclass
-class Discriminator:
+class Discriminator(BaseModel):
     propertyName: str
     mapping: Optional[Dict[str, str]] = None
 
 # A single encoding definition applied to a single schema property
-@dataclass
-class Encoding:
+class Encoding(BaseModel):
     contentType: Optional[str] = None
     headers: Optional[Dict[str, Union['Header', Reference]]] = None
     style: Optional[Style] = None
@@ -108,26 +100,22 @@ class Encoding:
     allowReserved: Optional[bool] = None
 
 # An example of the media type
-@dataclass
-class Example:
+class Example(BaseModel):
     summary: Optional[str] = None
     description: Optional[str] = None
     value: Optional[Any] = None
-    externalValue: Optional[str] = None
+    externalValue: Optional[AnyUrl] = None
 
 # Each Media Type object provides schema and examples for the media type identified by its key
-@dataclass
-class MediaType:
+class MediaType(BaseModel):
     schema: Optional[Union['Schema', Reference]] = None
     example: Optional[Any] = None
     examples: Optional[Dict[str, Union[Example, Reference]]] = None
     encoding: Optional[Dict[str, Encoding]] = None
 
 # The Schema Object allows the definition of input and output data types
-@dataclass
-class Schema:
-    # Reference
-    ref: Optional[str] = None  # Corresponds to $ref
+class Schema(BaseModel):
+    ref: Optional[str] = Field(default=None, alias='$ref')
 
     # Metadata
     title: Optional[str] = None
@@ -182,10 +170,10 @@ class Schema:
     allOf: Optional[List['Schema']] = None
     anyOf: Optional[List['Schema']] = None
     oneOf: Optional[List['Schema']] = None
-    not_: Optional['Schema'] = None  # Use 'not_' to avoid keyword conflict
-    if_: Optional['Schema'] = None  # Use 'if_' to avoid keyword conflict
+    not_: Optional['Schema'] = Field(default=None, alias='not')
+    if_: Optional['Schema'] = Field(default=None, alias='if')
     then: Optional['Schema'] = None
-    else_: Optional['Schema'] = None  # Use 'else_' to avoid keyword conflict
+    else_: Optional['Schema'] = Field(default=None, alias='else')
 
     # Enumeration and constant values
     enum: Optional[List[Any]] = None
@@ -203,11 +191,13 @@ class Schema:
     # Example value
     example: Optional[Any] = None
 
+    class Config:
+        allow_population_by_field_name = True
+
 # Describes a single operation parameter
-@dataclass
-class Parameter:
+class Parameter(BaseModel):
     name: str
-    in_: ParameterLocation  # Use 'in_' to avoid keyword conflict
+    in_: ParameterLocation = Field(..., alias='in')
     description: Optional[str] = None
     required: Optional[bool] = None
     deprecated: Optional[bool] = None
@@ -220,24 +210,24 @@ class Parameter:
     examples: Optional[Dict[str, Union[Example, Reference]]] = None
     content: Optional[Dict[str, MediaType]] = None
 
+    class Config:
+        allow_population_by_field_name = True
+
 # Describes a single request body
-@dataclass
-class RequestBody:
+class RequestBody(BaseModel):
     description: Optional[str] = None
     content: Dict[str, MediaType]
     required: Optional[bool] = None
 
 # Describes a single response from an API Operation
-@dataclass
-class Response:
+class Response(BaseModel):
     description: str
     headers: Optional[Dict[str, Union['Header', Reference]]] = None
     content: Optional[Dict[str, MediaType]] = None
     links: Optional[Dict[str, Union['Link', Reference]]] = None
 
 # The Link object represents a possible design-time link for a response
-@dataclass
-class Link:
+class Link(BaseModel):
     operationRef: Optional[str] = None
     operationId: Optional[str] = None
     parameters: Optional[Dict[str, Any]] = None
@@ -246,54 +236,53 @@ class Link:
     server: Optional[Server] = None
 
 # Header follows the structure of the Parameter Object with some changes
-@dataclass
-class Header:
+class Header(BaseModel):
     description: Optional[str] = None
-    required: Optional[bool] = False
-    deprecated: Optional[bool] = False
+    required: Optional[bool] = None
+    deprecated: Optional[bool] = None
+    allowEmptyValue: Optional[bool] = None
     style: Optional[Style] = None
     explode: Optional[bool] = None
+    allowReserved: Optional[bool] = None
     schema: Optional[Union[Schema, Reference]] = None
     example: Optional[Any] = None
     examples: Optional[Dict[str, Union[Example, Reference]]] = None
     content: Optional[Dict[str, MediaType]] = None
 
 # A map of possible out-of-band callbacks related to the parent operation
-@dataclass
-class Callback:
-    expressions: Dict[str, Union['PathItem', Reference]]
+class Callback(BaseModel):
+    __root__: Dict[str, Union['PathItem', Reference]]
 
 # Defines a security scheme that can be used by the operations
-@dataclass
-class SecurityScheme:
+class SecurityScheme(BaseModel):
     type: SecuritySchemeType
     description: Optional[str] = None
     name: Optional[str] = None
-    in_: Optional[ParameterLocation] = None
+    in_: Optional[ParameterLocation] = Field(default=None, alias='in')
     scheme: Optional[str] = None
     bearerFormat: Optional[str] = None
     flows: Optional['OAuthFlows'] = None
-    openIdConnectUrl: Optional[str] = None
+    openIdConnectUrl: Optional[AnyUrl] = None
+
+    class Config:
+        allow_population_by_field_name = True
 
 # Allows configuration of the supported OAuth Flows
-@dataclass
-class OAuthFlows:
+class OAuthFlows(BaseModel):
     implicit: Optional['OAuthFlow'] = None
     password: Optional['OAuthFlow'] = None
     clientCredentials: Optional['OAuthFlow'] = None
     authorizationCode: Optional['OAuthFlow'] = None
 
 # Configuration details for a supported OAuth Flow
-@dataclass
-class OAuthFlow:
-    authorizationUrl: Optional[str] = None
-    tokenUrl: Optional[str] = None
-    refreshUrl: Optional[str] = None
+class OAuthFlow(BaseModel):
+    authorizationUrl: Optional[AnyUrl] = None
+    tokenUrl: Optional[AnyUrl] = None
+    refreshUrl: Optional[AnyUrl] = None
     scopes: Dict[str, str]
 
 # Describes a single API operation on a path
-@dataclass
-class Operation:
+class Operation(BaseModel):
     tags: Optional[List[str]] = None
     summary: Optional[str] = None
     description: Optional[str] = None
@@ -308,9 +297,8 @@ class Operation:
     servers: Optional[List[Server]] = None
 
 # Describes the operations available on a single path
-@dataclass
-class PathItem:
-    ref: Optional[str] = None  # Corresponds to $ref
+class PathItem(BaseModel):
+    ref: Optional[str] = Field(default=None, alias='$ref')
     summary: Optional[str] = None
     description: Optional[str] = None
     get: Optional[Operation] = None
@@ -324,9 +312,11 @@ class PathItem:
     servers: Optional[List[Server]] = None
     parameters: Optional[List[Union[Parameter, Reference]]] = None
 
+    class Config:
+        allow_population_by_field_name = True
+
 # Holds a set of reusable objects for different aspects of the OAS
-@dataclass
-class Components:
+class Components(BaseModel):
     schemas: Optional[Dict[str, Union[Schema, Reference]]] = None
     responses: Optional[Dict[str, Union[Response, Reference]]] = None
     parameters: Optional[Dict[str, Union[Parameter, Reference]]] = None
@@ -336,21 +326,46 @@ class Components:
     securitySchemes: Optional[Dict[str, Union[SecurityScheme, Reference]]] = None
     links: Optional[Dict[str, Union[Link, Reference]]] = None
     callbacks: Optional[Dict[str, Union[Callback, Reference]]] = None
-    pathItems: Optional[Dict[str, Union[PathItem, Reference]]] = None  # Added pathItems for OpenAPI 3.1
-
-# A declaration of which security mechanisms can be used across the API
-SecurityRequirement = Dict[str, List[str]]  # Each name must correspond to a security scheme declared in the Security Schemes
+    pathItems: Optional[Dict[str, Union[PathItem, Reference]]] = None
 
 # The root document object of the OpenAPI document
-@dataclass
-class OpenAPI:
+class OpenAPI(BaseModel):
     openapi: str
     info: Info
-    jsonSchemaDialect: Optional[str] = None  # Specifies the default JSON Schema dialect for the schema objects
+    jsonSchemaDialect: Optional[AnyUrl] = None
     servers: Optional[List[Server]] = None
     paths: Dict[str, PathItem]
-    webhooks: Optional[Dict[str, Union[PathItem, Reference]]] = None  # Supports webhooks in OpenAPI 3.1
+    webhooks: Optional[Dict[str, Union[PathItem, Reference]]] = None
     components: Optional[Components] = None
-    security: Optional[List[SecurityRequirement]] = None
+    security: Optional[List[Dict[str, List[str]]]] = None  # List of SecurityRequirement
     tags: Optional[List[Tag]] = None
     externalDocs: Optional[ExternalDocumentation] = None
+
+# Update forward references
+Contact.update_forward_refs()
+License.update_forward_refs()
+Info.update_forward_refs()
+ServerVariable.update_forward_refs()
+Server.update_forward_refs()
+ExternalDocumentation.update_forward_refs()
+Tag.update_forward_refs()
+Reference.update_forward_refs()
+XML.update_forward_refs()
+Discriminator.update_forward_refs()
+Encoding.update_forward_refs()
+Example.update_forward_refs()
+MediaType.update_forward_refs()
+Schema.update_forward_refs()
+Parameter.update_forward_refs()
+RequestBody.update_forward_refs()
+Response.update_forward_refs()
+Link.update_forward_refs()
+Header.update_forward_refs()
+Callback.update_forward_refs()
+SecurityScheme.update_forward_refs()
+OAuthFlows.update_forward_refs()
+OAuthFlow.update_forward_refs()
+Operation.update_forward_refs()
+PathItem.update_forward_refs()
+Components.update_forward_refs()
+OpenAPI.update_forward_refs()
