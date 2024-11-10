@@ -37,17 +37,27 @@ def resolve_references(openapi_instance: Dict[str, Any], base_path: Union[str, P
     Resolves $ref references within an OpenAPI document.
 
     Args:
-        openapi_instance (dict): The parsed OpenAPI document as a dictionary.
+        openapi_instance (Dict[str, Any]): The parsed OpenAPI document as a dictionary.
         base_path (Union[str, Path], optional): The base path to resolve external references. Defaults to "".
 
     Returns:
-        dict: The OpenAPI document with references resolved.
+        Dict[str, Any]: The OpenAPI document with references resolved.
 
     Raises:
         ReferenceResolutionError: If there is an issue resolving references.
     """
     try:
         def resolve(node: Any, path: str = "") -> Any:
+            """
+            Recursively resolves references within the OpenAPI document.
+
+            Args:
+                node (Any): The current node in the OpenAPI document.
+                path (str, optional): The current path of the node being resolved. Defaults to "".
+
+            Returns:
+                Any: The resolved node.
+            """
             if isinstance(node, dict):
                 if "$ref" in node:
                     ref = node["$ref"]
