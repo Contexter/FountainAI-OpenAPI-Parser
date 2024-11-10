@@ -40,11 +40,20 @@ def commit_and_push_workflow(file_path: str, commit_message: str) -> None:
     """
     try:
         subprocess.run(["git", "add", file_path], check=True)
-        subprocess.run(["git", "commit", "-m", commit_message], check=True)
-        subprocess.run(["git", "push", "origin", "main"], check=True)
-        print("GitHub Actions workflow has been committed and pushed to the repository.")
     except subprocess.CalledProcessError as e:
-        print(f"Error: Git command failed. {e}")
+        print(f"Error: Failed to add file to Git. {e}")
+        raise
+
+    try:
+        subprocess.run(["git", "commit", "-m", commit_message], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: Failed to commit changes. {e}")
+        raise
+
+    try:
+        subprocess.run(["git", "push", "origin", "main"], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: Failed to push changes to the repository. {e}")
         raise
 
 def main() -> None:
@@ -101,4 +110,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
