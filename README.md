@@ -83,11 +83,63 @@ The following requirements are crucial for the development of the parser:
      pip install fountainai-openapi-parser
      ```
 
-## Implementation Prompt
+## Usage Examples
 
-The implementation prompt has been moved to a separate document. For the detailed prompting sequence used to create the FountainAI OpenAPI Parser, please refer to the following link:
+### Parsing an OpenAPI Document
 
-[Comprehensive Prompting Sequence for Creating FountainAI OpenAPI Parser Project](https://github.com/Contexter/FountainAI-OpenAPI-Parser/tree/main/Prompts/Prompts)
+The `parse_openapi()` function is the primary method for parsing OpenAPI documents. Here is an example of how to use it:
+
+```python
+from fountainai_openapi_parser import parse_openapi, ParsingError, ValidationError, ReferenceResolutionError
+from pathlib import Path
+
+# Example usage
+try:
+    openapi_instance = parse_openapi(Path("openapi.yaml"))
+    print("Parsed OpenAPI document successfully:", openapi_instance)
+except ParsingError as e:
+    print(f"Parsing error: {e}")
+except ValidationError as e:
+    print(f"Validation error: {e}")
+except ReferenceResolutionError as e:
+    print(f"Reference resolution error: {e}")
+```
+
+### Resolving References in an OpenAPI Document
+
+The `resolve_references()` function can be used to resolve `$ref` references within an OpenAPI document:
+
+```python
+from fountainai_openapi_parser import resolve_references
+
+# Assuming `openapi_dict` is a dictionary representing the OpenAPI document
+resolved_document = resolve_references(openapi_dict)
+print("Resolved document:", resolved_document)
+```
+
+### Loading Content from a File or String
+
+The `load_file()` function can load content from a file or directly from a string:
+
+```python
+from fountainai_openapi_parser import load_file
+from pathlib import Path
+
+# Loading from a file path
+file_path = Path("openapi.yaml")
+content = load_file(file_path)
+print("Loaded content from file:", content)
+
+# Loading directly from a string
+yaml_string = """
+openapi: 3.1.0
+info:
+  title: Sample API
+  version: 1.0.0
+"""
+content_from_string = load_file(yaml_string)
+print("Loaded content from string:", content_from_string)
+```
 
 ## Next Steps
 
@@ -99,8 +151,7 @@ For additional resources, refer to:
 - **Python Dataclasses**: [Python Dataclasses Documentation](https://docs.python.org/3/library/dataclasses.html)
 - **JSONSchema Validation**: [Python `jsonschema` library](https://pypi.org/project/jsonschema/)
 
-Feel free to contribute by raising issues or suggesting improvements through GitHub. Let's make **FountainAI OpenAPI Parser** a cornerstone tool for our broader ecosystem.
-
 ## License
 
 This project is licensed under the **MIT License** - see the `LICENSE` file for more details.
+
