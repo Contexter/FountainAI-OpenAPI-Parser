@@ -1,5 +1,5 @@
 from typing import Optional, List, Dict, Any, Union
-from pydantic import BaseModel, Field, AnyUrl, EmailStr
+from pydantic import BaseModel, Field, AnyUrl, EmailStr, RootModel
 from enum import Enum
 
 
@@ -273,8 +273,8 @@ class Header(BaseModel):
 
 
 # A map of possible out-of-band callbacks related to the parent operation
-class Callback(BaseModel):
-    __root__: Dict[str, Union['PathItem', Reference]]
+class Callback(RootModel[Dict[str, Union['PathItem', Reference]]]):
+    pass
 
 
 # Defines a security scheme that can be used by the operations
@@ -372,31 +372,31 @@ class OpenAPI(BaseModel):
     externalDocs: Optional[ExternalDocumentation] = None
 
 
-# Update forward references
-Contact.update_forward_refs()
-License.update_forward_refs()
-Info.update_forward_refs()
-ServerVariable.update_forward_refs()
-Server.update_forward_refs()
-ExternalDocumentation.update_forward_refs()
-Tag.update_forward_refs()
-Reference.update_forward_refs()
-XML.update_forward_refs()
-Discriminator.update_forward_refs()
-Encoding.update_forward_refs()
-Example.update_forward_refs()
-MediaType.update_forward_refs()
-Schema.update_forward_refs()
-Parameter.update_forward_refs()
-RequestBody.update_forward_refs()
-Response.update_forward_refs()
-Link.update_forward_refs()
-Header.update_forward_refs()
-Callback.update_forward_refs()
-SecurityScheme.update_forward_refs()
-OAuthFlows.update_forward_refs()
-OAuthFlow.update_forward_refs()
-Operation.update_forward_refs()
-PathItem.update_forward_refs()
-Components.update_forward_refs()
-OpenAPI.update_forward_refs()
+# Rebuild models to update forward references
+Contact.model_rebuild()
+License.model_rebuild()
+Info.model_rebuild()
+ServerVariable.model_rebuild()
+Server.model_rebuild()
+ExternalDocumentation.model_rebuild()
+Tag.model_rebuild()
+Reference.model_rebuild()
+XML.model_rebuild()
+Discriminator.model_rebuild()
+Encoding.model_rebuild()
+Example.model_rebuild()
+MediaType.model_rebuild()
+Schema.model_rebuild()
+Parameter.model_rebuild()
+RequestBody.model_rebuild()
+Response.model_rebuild()
+Link.model_rebuild()
+Header.model_rebuild()
+Callback.model_rebuild()
+SecurityScheme.model_rebuild()
+OAuthFlows.model_rebuild()
+OAuthFlow.model_rebuild()
+Operation.model_rebuild()
+PathItem.model_rebuild()
+Components.model_rebuild()
+OpenAPI.model_rebuild()
