@@ -4,7 +4,7 @@ import yaml
 import json
 from .models import OpenAPI
 from .utils import load_file, resolve_references
-from .exceptions import ParsingError, ValidationError
+from .exceptions import ParsingError, ValidationError, ReferenceResolutionError
 
 
 def parse_openapi(
@@ -26,6 +26,7 @@ def parse_openapi(
     Raises:
         ParsingError: If there is a problem parsing the document.
         ValidationError: If the document does not conform to the OpenAPI 3.1 specification.
+        ReferenceResolutionError: If there is an issue resolving references in the document.
     """
     try:
         content = load_file(source, encoding)
@@ -49,3 +50,5 @@ def parse_openapi(
         raise ParsingError(f"Failed to parse the document: {str(e)}")
     except ValidationError as e:
         raise ValidationError(f"Validation error: {str(e)}")
+    except ReferenceResolutionError as e:
+        raise ReferenceResolutionError(f"Reference resolution error: {str(e)}")
