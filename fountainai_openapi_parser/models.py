@@ -87,7 +87,7 @@ class Reference(BaseModel):
     description: Optional[str] = None
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 
 # A metadata object that allows for more fine-tuned XML model definitions
@@ -124,7 +124,7 @@ class Example(BaseModel):
 
 # Each Media Type object provides schema and examples for the media type identified by its key
 class MediaType(BaseModel):
-    schema: Optional[Union['Schema', Reference]] = None
+    schema_data: Optional[Union['Schema', Reference]] = None
     example: Optional[Any] = None
     examples: Optional[Dict[str, Union[Example, Reference]]] = None
     encoding: Optional[Dict[str, Encoding]] = None
@@ -209,7 +209,7 @@ class Schema(BaseModel):
     example: Optional[Any] = None
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 
 # Describes a single operation parameter
@@ -223,13 +223,13 @@ class Parameter(BaseModel):
     style: Optional[Style] = None
     explode: Optional[bool] = None
     allowReserved: Optional[bool] = None
-    schema: Optional[Union[Schema, Reference]] = None
+    schema_data: Optional[Union[Schema, Reference]] = None
     example: Optional[Any] = None
     examples: Optional[Dict[str, Union[Example, Reference]]] = None
     content: Optional[Dict[str, MediaType]] = None
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 
 # Describes a single request body
@@ -266,7 +266,7 @@ class Header(BaseModel):
     style: Optional[Style] = None
     explode: Optional[bool] = None
     allowReserved: Optional[bool] = None
-    schema: Optional[Union[Schema, Reference]] = None
+    schema_data: Optional[Union[Schema, Reference]] = None
     example: Optional[Any] = None
     examples: Optional[Dict[str, Union[Example, Reference]]] = None
     content: Optional[Dict[str, MediaType]] = None
@@ -289,7 +289,7 @@ class SecurityScheme(BaseModel):
     openIdConnectUrl: Optional[AnyUrl] = None
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 
 # Allows configuration of the supported OAuth Flows
@@ -341,7 +341,7 @@ class PathItem(BaseModel):
     parameters: Optional[List[Union[Parameter, Reference]]] = None
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 
 # Holds a set of reusable objects for different aspects of the OAS
