@@ -95,6 +95,34 @@ class TestUtils(unittest.TestCase):
             }
         }
 
+        self.circular_ref_document = {
+            "openapi": "3.1.0",
+            "info": {
+                "title": "Sample API with Circular Reference",
+                "version": "1.0.0"
+            },
+            "components": {
+                "schemas": {
+                    "SchemaA": {
+                        "type": "object",
+                        "properties": {
+                            "child": {
+                                "$ref": "#/components/schemas/SchemaB"
+                            }
+                        }
+                    },
+                    "SchemaB": {
+                        "type": "object",
+                        "properties": {
+                            "parent": {
+                                "$ref": "#/components/schemas/SchemaA"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     def test_load_file_from_path(self):
         # Test loading content from a file path
         path = Path("test_openapi.yaml")
@@ -182,6 +210,11 @@ class TestUtils(unittest.TestCase):
             self.fail(f"Unexpected reference resolution error: {e}")
         finally:
             external_path.unlink()  # Clean up after test
+
+    def test_resolve_circular_reference(self):
+        # Test resolving a circular $ref reference
+        with self.assertRaises(ReferenceResolutionError):
+            resolve_references(self.circular_ref_document)
 
 
 if __name__ == "__main__":
