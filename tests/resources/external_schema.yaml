@@ -1,7 +1,0 @@
-
-            ExampleSchema:
-              type: object
-              properties:
-                example_property:
-                  type: string
-            

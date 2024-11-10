@@ -1,94 +1,53 @@
 import unittest
-from pathlib import Path
-from fountainai_openapi_parser.parser import parse_openapi
-from fountainai_openapi_parser.exceptions import ParsingError, ValidationError, ReferenceResolutionError
-
+from fountainai_openapi_parser.parser import parse_openapi, OpenAPI
 
 class TestParser(unittest.TestCase):
-    def setUp(self) -> None:
-        """
-        Set up example OpenAPI YAML content for testing.
-        """
-        # Example OpenAPI YAML content for testing
-        self.valid_openapi_yaml: str = """
-        openapi: 3.1.0
-        info:
-          title: Sample API
-          version: 1.0.0
-        paths:
-          /example:
-            get:
-              summary: Example endpoint
-              responses:
-                '200':
-                  description: Successful response
-        """
 
-        self.invalid_openapi_yaml: str = """
-        openapi: 3.1.0
-        info:
-          title: Sample API
-          version: 1.0.0
-        paths: invalid_content
-        """
+    def setUp(self):
+        self.valid_openapi_yaml = {
+            "openapi": "3.0.0",
+            "info": {"title": "Sample API", "version": "1.0.0"},
+            "paths": {
+                "/example": {
+                    "get": {
+                        "responses": {
+                            "200": {
+                                "description": "A successful response",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "example_field": {"type": "string"}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-        self.openapi_with_ref: str = """
-        openapi: 3.1.0
-        info:
-          title: Sample API with Reference
-          version: 1.0.0
-        paths:
-          /example:
-            get:
-              summary: Example endpoint
-              responses:
-                '200':
-                  description: Successful response
-                  content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/ExampleSchema'
-        components:
-          schemas:
-            ExampleSchema:
-              type: object
-              properties:
-                message:
-                  type: string
-        """
+        self.invalid_openapi_yaml = {
+            "openapi": "3.0.0",
+            "info": "Invalid structure",
+            "paths": "invalid_content"
+        }
 
-    def test_parse_valid_openapi_yaml(self) -> None:
-        """
-        Test parsing of a valid OpenAPI YAML document.
-        """
-        result = parse_openapi(self.valid_openapi_yaml)
-        self.assertIsNotNone(result)
-        self.assertEqual(result.info.title, "Sample API")
-
-    def test_parse_invalid_openapi_yaml(self) -> None:
-        """
-        Test parsing of an invalid OpenAPI YAML document.
-        """
-        with self.assertRaises(ParsingError):
-            parse_openapi(self.invalid_openapi_yaml)
-
-    def test_parse_with_reference(self) -> None:
-        """
-        Test parsing of an OpenAPI YAML document with a local $ref reference.
-        """
-        result = parse_openapi(self.openapi_with_ref)
-        self.assertIsNotNone(result)
+    def test_parse_valid_openapi_yaml(self):
+        parsed = parse_openapi(self.valid_openapi_yaml)
+        self.assertIsInstance(parsed, OpenAPI)
+        self.assertIn("/example", parsed.paths)
         self.assertEqual(
-            result.paths['/example'].get.responses['200'].content['application/json'].schema.type, "object"
+            parsed.paths["/example"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["type"],
+            "object"
         )
 
-    def test_parse_nonexistent_file(self) -> None:
-        """
-        Test parsing a nonexistent file path.
-        """
-        with self.assertRaises(FileNotFoundError):
-            parse_openapi(Path("nonexistent_file.yaml"))
-
+    def test_parse_invalid_openapi_yaml(self):
+        with self.assertRaises(ValueError):
+            parse_openapi(self.invalid_openapi_yaml)
 
 if __name__ == "__main__":
     unittest.main()

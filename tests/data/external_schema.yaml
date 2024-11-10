@@ -1,7 +1,7 @@
-ExampleSchema:
-  type: object
-  properties:
-    name:
-      type: string
-    age:
-      type: integer
+components:
+  schemas:
+    ExampleSchema:
+      properties:
+        example_field:
+          type: string
+      type: object
