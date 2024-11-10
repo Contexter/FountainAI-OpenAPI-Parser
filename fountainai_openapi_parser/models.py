@@ -364,7 +364,7 @@ class OpenAPI(BaseModel):
     info: Info
     jsonSchemaDialect: Optional[AnyUrl] = None
     servers: Optional[List[Server]] = None
-    paths: Dict[str, PathItem] = Field(default_factory=dict)
+    paths: dict
     webhooks: Optional[Dict[str, Union[PathItem, Reference]]] = None
     components: Optional[Components] = None
     security: Optional[List[Dict[str, List[str]]]] = None  # List of SecurityRequirement
