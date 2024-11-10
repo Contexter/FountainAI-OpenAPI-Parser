@@ -68,6 +68,33 @@ class TestUtils(unittest.TestCase):
             }
         }
 
+        self.external_ref_document = {
+            "openapi": "3.1.0",
+            "info": {
+                "title": "Sample API with External Reference",
+                "version": "1.0.0"
+            },
+            "paths": {
+                "/example": {
+                    "get": {
+                        "summary": "Example endpoint",
+                        "responses": {
+                            "200": {
+                                "description": "Successful response",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "external_schema.yaml#/ExampleSchema"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     def test_load_file_from_path(self):
         # Test loading content from a file path
         path = Path("test_openapi.yaml")
@@ -130,7 +157,32 @@ class TestUtils(unittest.TestCase):
         with self.assertRaises(ReferenceResolutionError):
             resolve_references(document_with_missing_ref)
 
+    def test_resolve_external_reference(self):
+        # Test resolving an external $ref reference
+        external_path = Path("external_schema.yaml")
+        external_content = {
+            "ExampleSchema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+        external_path.write_text(yaml.dump(external_content))
+
+        try:
+            resolved_document = resolve_references(self.external_ref_document, base_path=external_path)
+            self.assertEqual(
+                resolved_document["paths"]["/example"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["type"],
+                "object"
+            )
+        except ReferenceResolutionError as e:
+            self.fail(f"Unexpected reference resolution error: {e}")
+        finally:
+            external_path.unlink()  # Clean up after test
+
 
 if __name__ == "__main__":
     unittest.main()
-
