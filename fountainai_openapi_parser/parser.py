@@ -30,22 +30,22 @@ def parse_openapi(
     """
     try:
         content = load_file(source, encoding)
-        
+
         # Determine if the content is JSON or YAML
-        if content.strip().startswith('{'):
+        if content.strip().startswith("{"):
             parsed_data = json.loads(content)
         else:
             parsed_data = yaml.safe_load(content)
-        
+
         # Validate and create an OpenAPI object
         openapi_instance = OpenAPI(**parsed_data)
-        
+
         # Resolve references if flag is set
         if resolve_references_flag:
             openapi_instance = resolve_references(openapi_instance)
-        
+
         return openapi_instance
-    
+
     except (yaml.YAMLError, json.JSONDecodeError) as e:
         raise ParsingError(f"Failed to parse the document: {str(e)}")
     except ValidationError as e:
