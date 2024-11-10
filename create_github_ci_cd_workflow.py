@@ -45,7 +45,13 @@ def commit_and_push_workflow(file_path: str, commit_message: str) -> None:
         raise
 
     try:
-        subprocess.run(["git", "commit", "-m", commit_message], check=True)
+        # Check if there are any changes to commit
+        result = subprocess.run(["git", "status", "--porcelain"], check=True, capture_output=True, text=True)
+        if result.stdout.strip():
+            subprocess.run(["git", "commit", "-m", commit_message], check=True)
+        else:
+            print("No changes detected. Nothing to commit.")
+            return
     except subprocess.CalledProcessError as e:
         print(f"Error: Failed to commit changes. {e}")
         raise
