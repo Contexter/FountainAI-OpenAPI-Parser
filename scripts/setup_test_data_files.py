@@ -21,7 +21,7 @@ logging.info(f"Ensured test data directory exists at {test_data_dir}")
 invalid_openapi_content = {
     "openapi": "3.0.0",
     "info": {"title": "Invalid API", "version": "1.0.0"},
-    "paths": "invalid_content",  # This is intentionally incorrect
+    "paths": "invalid_content"  # Intentionally incorrect for testing purposes
 }
 
 # Content for openapi.yaml
@@ -40,22 +40,22 @@ valid_openapi_content = {
                                     "type": "object",
                                     "properties": {
                                         "message": {"type": "string"}
-                                    },
+                                    }
                                 }
                             }
-                        },
+                        }
                     }
                 }
             }
         }
-    },
+    }
 }
 
 # Content for external_schema.yaml
 external_schema_content = {
     "ExampleSchema": {
         "type": "object",
-        "properties": {"example_field": {"type": "string"}},
+        "properties": {"example_field": {"type": "string"}}
     }
 }
 
@@ -76,6 +76,5 @@ with open(external_schema_path, "w") as file:
 
 # Notify script completion
 logging.info(
-"YAML setup completed. Now you can run your tests using `python -m unittest
-discover -s tests`."
+    "YAML setup completed. You can now run your tests using `python -m unittest discover -s tests`."
 )
