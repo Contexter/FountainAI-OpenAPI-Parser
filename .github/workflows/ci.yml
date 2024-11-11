@@ -40,7 +40,7 @@ jobs:
 
       - name: Run Type Checking (Mypy)
         run: |
-          pip install mypy
+          pip install mypy types-PyYAML
           mypy fountainai_openapi_parser
 
       - name: Check Code Formatting (Black)
