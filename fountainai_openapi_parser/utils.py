@@ -34,8 +34,7 @@ def load_file(source: Union[str, Path], encoding: str = "utf-8") -> str:
 
 
 def resolve_references(
-    openapi_instance: Dict[str, Any],
-    base_path: Union[str, Path] = ""
+    openapi_instance: Dict[str, Any], base_path: Union[str, Path] = ""
 ) -> Dict[str, Any]:
     """
     Resolves $ref references within an OpenAPI document.
@@ -90,20 +89,12 @@ def resolve_references(
                             external_data = json.loads(external_content)
                         return resolve(external_data, str(external_path))
                 else:
-                    return {
-                        key: resolve(value, path + f"/{key}")
-                        for key, value in node.items()
-                    }
+                    return {key: resolve(value, path + f"/{key}") for key, value in node.items()}
             elif isinstance(node, list):
-                return [
-                    resolve(item, path + f"/[{i}]")
-                    for i, item in enumerate(node)
-                ]
+                return [resolve(item, path + f"/[{i}]") for i, item in enumerate(node)]
             else:
                 return node
 
         return resolve(openapi_instance)
     except Exception as e:
-        raise ReferenceResolutionError(
-            f"Failed to resolve references: {str(e)}"
-        )
+        raise ReferenceResolutionError(f"Failed to resolve references: {str(e)}")
