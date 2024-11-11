@@ -14,11 +14,10 @@ def update_parser_function():
 
     with open(parser_file_path, "w") as f:
         for line in lines:
-# Modify the line where `load_file` is called to bypass if `source` is a dict
+            # Modify the line where `load_file` is called to bypass if `source` is a dict
             if "content = load_file(source, encoding)" in line:
                 f.write(
-"    content = source if isinstance(source, dict) else load_file(source,
-encoding)\n"
+                    "    content = source if isinstance(source, dict) else load_file(source, encoding)\n"
                 )
             else:
                 f.write(line)
@@ -31,7 +30,7 @@ def update_test_parser():
         lines = f.readlines()
 
     with open(test_parser_file_path, "w") as f:
-for line in lines:
+        for line in lines:
             # Replace instances where files are passed directly to `parse_openapi`
             if "parse_openapi(" in line:
                 line = line.replace(
