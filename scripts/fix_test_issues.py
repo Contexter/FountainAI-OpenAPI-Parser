@@ -21,8 +21,8 @@ def check_file_exists(filepath):
 
 
 def validate_openapi_structure(filepath):
-"""Validate the structure of the OpenAPI YAML file for compatibility with
-Pydantic."""
+    """Validate the structure of the OpenAPI YAML file for compatibility with
+    Pydantic."""
     try:
         with open(filepath, "r") as file:
             openapi_data = yaml.safe_load(file)
