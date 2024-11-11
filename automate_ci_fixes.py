@@ -71,7 +71,7 @@ def add_file_existence_check(file_path):
             if "open(file_path, 'r')" in line:
                 line = line.replace(
                     "open(file_path, 'r')",
-                    "open(file_path, 'r') if os.path.exists(file_path) else None",
+"open(file_path, 'r') if os.path.exists(file_path) else None",
                 )
             print(line, end="")
 

@@ -122,7 +122,8 @@ class Example(BaseModel):
     externalValue: Optional[AnyUrl] = None
 
 
-# Each Media Type object provides schema and examples for the media type identified by its key
+# Each Media Type object provides schema and examples for the media type
+identified by its key
 class MediaType(BaseModel):
     schema_data: Optional[Union["Schema", Reference]] = None
     example: Optional[Any] = None

@@ -1,6 +1,7 @@
 (
     Parser - Illustration.p
-)  # Create the directed graph for circular parsing logic visualization including all nodes
+)  # Create the directed graph for circular parsing logic visualization
+including all nodes
 G = nx.DiGraph()
 
 # Define nodes involved in the parsing process and existing APIs

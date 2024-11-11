@@ -29,7 +29,7 @@ def update_schema_field(
     within_class = None
 
     for line in lines:
-        # Detect the start of a class and check if it's one of the target classes
+# Detect the start of a class and check if it's one of the target classes
         class_match = re.match(r"class\s+(\w+)\(BaseModel\):", line)
         if class_match:
             class_name = class_match.group(1)
@@ -43,7 +43,8 @@ def update_schema_field(
             updated_line = line.replace(old_field, new_field)
             updated_lines.append(updated_line)
             print(
-                f"Updated '{old_field}' to '{new_field}' in class '{within_class}' in {filename}"
+f"Updated '{old_field}' to '{new_field}' in class '{within_class}' in
+{filename}"
             )
         else:
             updated_lines.append(line)

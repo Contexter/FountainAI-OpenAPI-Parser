@@ -76,5 +76,6 @@ with open(external_schema_path, "w") as file:
 
 # Notify script completion
 logging.info(
-    "YAML setup completed. Now you can run your tests using `python -m unittest discover -s tests`."
+"YAML setup completed. Now you can run your tests using `python -m unittest
+discover -s tests`."
 )

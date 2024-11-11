@@ -11,7 +11,8 @@ def load_file(source: Union[str, Path], encoding: str = "utf-8") -> str:
 
     Args:
         source (Union[str, Path]): The file path or content as a string.
-        encoding (str, optional): The encoding of the file if a file path is provided. Defaults to 'utf-8'.
+encoding (str, optional): The encoding of the file if a file path is provided.
+Defaults to 'utf-8'.
 
     Returns:
         str: The content of the file.
@@ -38,8 +39,9 @@ def resolve_references(
     """
     Resolves $ref references within an OpenAPI document.
 
-    Args:
-        openapi_instance (Dict[str, Any]): The parsed OpenAPI document as a dictionary.
+Args:
+openapi_instance (Dict[str, Any]): The parsed OpenAPI document as a
+dictionary.
         base_path (Union[str, Path], optional): The base path to resolve external references. Defaults to "".
 
     Returns:
@@ -54,7 +56,7 @@ def resolve_references(
             """
             Recursively resolves references within the OpenAPI document.
 
-            Args:
+Args:
                 node (Any): The current node in the OpenAPI document.
                 path (str, optional): The current path of the node being resolved. Defaults to "".
 

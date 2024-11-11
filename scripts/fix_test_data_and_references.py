@@ -76,7 +76,8 @@ import yaml
 class TestParser(unittest.TestCase):
     def setUp(self):
         self.valid_openapi_path = Path(__file__).parent / "data/openapi.yaml"
-        self.invalid_openapi_path = Path(__file__).parent / "data/invalid_openapi.yaml"
+self.invalid_openapi_path = Path(__file__).parent /
+"data/invalid_openapi.yaml"
 
     def test_parse_valid_openapi_yaml(self):
         with open(self.valid_openapi_path) as f:
@@ -109,8 +110,9 @@ class TestIntegration(unittest.TestCase):
 
     def test_external_reference_resolution(self):
         with open(self.openapi_path) as f:
-            openapi_yaml = yaml.safe_load(f)
-        resolved_result = resolve_references(openapi_yaml, base_path=Path(__file__).parent / "data")
+openapi_yaml = yaml.safe_load(f)
+resolved_result = resolve_references(openapi_yaml,
+base_path=Path(__file__).parent / "data")
         self.assertIn("example_field", resolved_result['components']['schemas']['ExampleSchema']['properties'])
     """
     )
@@ -131,8 +133,8 @@ class TestUtils(unittest.TestCase):
         self.external_ref_path = Path(__file__).parent / "data/external_schema.yaml"
 
     def test_resolve_external_reference(self):
-        with open(self.external_ref_path) as f:
-            external_yaml = yaml.safe_load(f)
+with open(self.external_ref_path) as f:
+external_yaml = yaml.safe_load(f)
         resolved_data = resolve_references(external_yaml, base_path=Path(__file__).parent / "data")
         self.assertIn("example_field", resolved_data['components']['schemas']['ExampleSchema']['properties'])
     """

@@ -12,7 +12,7 @@ def create_github_workflow_directory(directory: str) -> None:
         os.makedirs(directory, exist_ok=True)
     except PermissionError as e:
         print(
-            f"Error: Permission denied while creating directory {directory}. {e}"
+f"Error: Permission denied while creating directory {directory}. {e}"
         )
         raise
     except OSError as e:
@@ -38,7 +38,7 @@ def write_github_workflow_file(file_path: str, content: str) -> None:
 
 def commit_and_push_workflow(file_path: str, commit_message: str) -> None:
     """
-    Add the workflow file to Git, commit the changes, and push to the repository.
+Add the workflow file to Git, commit the changes, and push to the repository.
     Args:
         file_path (str): The path to the workflow file to be committed.
         commit_message (str): The commit message for the Git commit.
@@ -75,7 +75,8 @@ def commit_and_push_workflow(file_path: str, commit_message: str) -> None:
 
 def main() -> None:
     """
-    Main function to create the GitHub Actions CI/CD workflow file, commit, and push it.
+Main function to create the GitHub Actions CI/CD workflow file, commit, and
+push it.
     """
     # Define the YAML content for the GitHub Actions workflow
     github_workflow_content = """

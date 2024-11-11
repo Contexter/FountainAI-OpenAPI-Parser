@@ -22,7 +22,8 @@ def check_and_update_pydantic_models():
     updated_lines = []
     with open(models_file, "r") as file:
         for line in file:
-            # This assumes `paths` field needs to be a dictionary based on the errors seen.
+# This assumes `paths` field needs to be a dictionary based on the errors
+seen.
             if "paths:" in line:
                 updated_lines.append(
                     "    paths: dict\n"
@@ -57,13 +58,13 @@ def modify_test_for_missing_file():
 
     updated_content = []
     for line in content:
-        if "FileNotFoundError" in line:
+if "FileNotFoundError" in line:
             # Add handling to mock file loading where `FileNotFoundError` is expected
             updated_content.append("from unittest import mock\n")
             updated_content.append(
                 "import fountainai_openapi_parser.utils as utils\n"
             )
-            updated_content.append(
+updated_content.append(
                 "with mock.patch('utils.load_file', return_value={'ExampleSchema': {'type': 'object'}}):\n"
             )
         updated_content.append(line)

@@ -114,7 +114,8 @@ class TestIntegration(unittest.TestCase):
             self.openapi_yaml = yaml.safe_load(f)
 
     def test_external_reference_resolution(self):
-        resolved_result = resolve_references(self.openapi_yaml, base_path=Path(__file__).parent / "data")
+resolved_result = resolve_references(self.openapi_yaml,
+base_path=Path(__file__).parent / "data")
         self.assertIn("example_field", resolved_result["components"]["schemas"]["ExampleSchema"]["properties"])
     """
     )
@@ -133,8 +134,9 @@ class TestUtils(unittest.TestCase):
         with open(Path(__file__).parent / "data/external_schema.yaml") as f:
             self.external_ref_yaml = yaml.safe_load(f)
 
-    def test_resolve_external_reference(self):
-        resolved_data = resolve_references(self.external_ref_yaml, base_path=Path(__file__).parent / "data")
+def test_resolve_external_reference(self):
+resolved_data = resolve_references(self.external_ref_yaml,
+base_path=Path(__file__).parent / "data")
         self.assertIn("example_field", resolved_data["components"]["schemas"]["ExampleSchema"]["properties"])
     """
     )

@@ -26,7 +26,8 @@ class ValidationError(Exception):
 
 class ReferenceResolutionError(Exception):
     """
-    Raised when there is an issue resolving $ref references in the OpenAPI document.
+Raised when there is an issue resolving $ref references in the OpenAPI
+document.
 
     Attributes:
         message (str): Description of the reference resolution error.

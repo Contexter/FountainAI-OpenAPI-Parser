@@ -43,7 +43,8 @@ def load_yaml(file_path):
 
 
 def save_yaml(data, file_path):
-    """Save data as a YAML file, ensuring not to overwrite existing configurations."""
+"""Save data as a YAML file, ensuring not to overwrite existing
+configurations."""
     backup_file(file_path)
     with open(file_path, "w") as file:
         yaml.dump(data, file)
@@ -68,7 +69,7 @@ def update_workflow():
     if current_config is not None:
         # Check for specific keys or elements to avoid redundant changes
         if "jobs" in current_config and "test" in current_config["jobs"]:
-            logging.info(
+logging.info(
                 "Workflow file already contains the necessary jobs. Skipping update."
             )
             return

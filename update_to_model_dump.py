@@ -19,7 +19,8 @@ dict_pattern = re.compile(r"(\w+)\.dict\((.*?)\)")
 
 
 def update_file(file_path):
-    """Reads a file, replaces `.dict()` with `.model_dump()`, and writes it back."""
+"""Reads a file, replaces `.dict()` with `.model_dump()`, and writes it
+back."""
     changes_made = False
     with open(file_path, "r") as file:
         content = file.read()
