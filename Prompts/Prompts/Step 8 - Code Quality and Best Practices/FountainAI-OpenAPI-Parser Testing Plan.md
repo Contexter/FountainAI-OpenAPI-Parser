@@ -1,151 +1,103 @@
-# 📋 Comprehensive Testing Plan for FountainAI-OpenAPI-Parser
+# 📋 Structured Testing Plan for FountainAI-OpenAPI-Parser: Linked Issue Tracker
 
-This document details a structured testing plan for `FountainAI-OpenAPI-Parser`, tailored to the current repository structure and resources. Each section addresses a specific area within the repository, providing a practical roadmap to improve test coverage and robustness.
+This document outlines a comprehensive testing strategy for `FountainAI-OpenAPI-Parser`, with each task directly linked to a GitHub issue for streamlined tracking and resolution. This approach ensures that every aspect of testing—mocking, core functionality, utilities, integration, and exception handling—is systematically addressed.
 
 ---
 
 ### **Table of Contents**
-1. [Implement Mocking Strategy for External Dependencies](#1-implement-mocking-strategy-for-external-dependencies)
-2. [Enhance Test Coverage for Parser Core Functionality](#2-enhance-test-coverage-for-parser-core-functionality)
-3. [Expand Unit Tests for Utility Functions](#3-expand-unit-tests-for-utility-functions)
-4. [Add Integration Tests for Full Parser Workflow](#4-add-integration-tests-for-full-parser-workflow)
-5. [Enhance Exception Handling Tests](#5-enhance-exception-handling-tests)
-6. [Implement Code Coverage and Reporting](#6-implement-code-coverage-and-reporting)
+1. [Mocking Strategy for External Dependencies](#1-mocking-strategy-for-external-dependencies)
+2. [Parser Core Functionality Tests](#2-parser-core-functionality-tests)
+3. [Utility Function Tests](#3-utility-function-tests)
+4. [Integration Tests for Full Parser Workflow](#4-integration-tests-for-full-parser-workflow)
+5. [Exception Handling Tests](#5-exception-handling-tests)
 
 ---
 
-## 1. Implement Mocking Strategy for External Dependencies
+## 1. Mocking Strategy for External Dependencies
 
-> **Objective**: Isolate tests from external dependencies to ensure they run deterministically in any environment.
+> **Objective**: Establish test isolation by mocking external dependencies, ensuring tests are deterministic and independent of external resources.
 
-### Existing Files to Leverage
-- `fountainai_openapi_parser/utils.py`: Likely contains utility functions that may interface with external resources.
-- `tests/test_utils.py`: Unit tests for `utils.py` functions. Could be expanded to include mock dependencies where applicable.
+- **[Identify External Dependencies for Mocking](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/1)**
+  - **Action**: Review `utils.py` and `parser.py` for any external calls, such as network requests or file I/O operations.
 
-### Action Plan
-- **[ ] Identify Dependencies**: Review functions in `utils.py` and `parser.py` to identify any external calls (e.g., network requests, file I/O) that require mocking.
-  
-- **[ ] Set Up Mocks**:
-  - Use libraries like `unittest.mock` to replace external calls with mocks.
-  - Specifically mock any file operations in `test_utils.py` to prevent direct file system access.
-  
-- **[ ] Document Mocking Approach**:
-  - Update the existing `FountainAI-OpenAPI-Parser Testing Plan.md` in `Prompts/Prompts/Step 8` to describe the mocking strategy, including how to add new mocks.
-  
-- **[ ] Verify Mocks**:
-  - Ensure all external interactions are mocked by running tests in isolation, simulating different scenarios without relying on real resources.
+- **[Set Up Mocking for Identified Dependencies](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/2)**
+  - **Action**: Implement mocks for dependencies identified in the previous step, using `unittest.mock` for external calls.
+
+- **[Document Mocking Strategy](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/3)**
+  - **Action**: Update `FountainAI-OpenAPI-Parser Testing Plan.md` to describe the mocking approach, including examples for consistent implementation.
+
+- **[Verify Effectiveness of Mock Isolation](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/4)**
+  - **Action**: Run all tests to confirm that mocks are effectively isolating external dependencies.
 
 ---
 
-## 2. Enhance Test Coverage for Parser Core Functionality
+## 2. Parser Core Functionality Tests
 
-> **Objective**: Increase coverage of core parser functions, especially for essential OpenAPI parsing.
+> **Objective**: Thoroughly test core parser functions to ensure they handle diverse OpenAPI structures and edge cases accurately.
 
-### Existing Files to Leverage
-- `fountainai_openapi_parser/parser.py`: Core parser implementation for OpenAPI.
-- `tests/test_parser.py`: Unit tests for the parser, likely covering basic and some edge cases.
+- **[Expand Basic Parsing Tests in Parser Core](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/5)**
+  - **Action**: Add cases to `test_parser.py` that validate basic parsing of `openapi.yaml` for standard OpenAPI documents.
 
-### Action Plan
-- **[ ] Basic Parsing**:
-  - Expand `test_parser.py` to cover additional simple OpenAPI files (`tests/data/openapi.yaml`).
-  
-- **[ ] Path and Method Parsing**:
-  - Extend tests in `test_parser.py` to cover multiple HTTP methods within a single path.
-  - Include example OpenAPI files (e.g., `tests/data/invalid_openapi.yaml`) to simulate real-world API definitions.
-  
-- **[ ] Schema and Nested Parsing**:
-  - Add more complex schemas to `openapi.yaml`, including nested paths and object schemas.
-  - Test complex schemas directly in `test_parser.py` and verify all attributes and references resolve correctly.
+- **[Add Path and Method Parsing Tests](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/6)**
+  - **Action**: Include tests for multiple HTTP methods within a single path to ensure comprehensive path parsing.
 
-- **[ ] Invalid Structure Handling**:
-  - Expand `tests/data/invalid_openapi.yaml` with variations of common structural errors (e.g., missing keys, incorrect types) and confirm error handling in `test_parser.py`.
+- **[Develop Schema Validation Tests for Parser Core](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/7)**
+  - **Action**: Validate the parser’s handling of different schema types, such as arrays, objects, and custom definitions.
+
+- **[Add Nested Path Parsing Tests](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/8)**
+  - **Action**: Expand tests in `test_parser.py` to verify accurate parsing of nested paths and references.
+
+- **[Expand Tests for Invalid Structure Handling](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/9)**
+  - **Action**: Test for appropriate error handling when parsing structurally invalid OpenAPI documents using `invalid_openapi.yaml`.
 
 ---
 
-## 3. Expand Unit Tests for Utility Functions
+## 3. Utility Function Tests
 
-> **Objective**: Enhance robustness and edge case handling within `utils.py`.
+> **Objective**: Ensure all utility functions are robust and can handle various input types, references, and complex path manipulations.
 
-### Existing Files to Leverage
-- `fountainai_openapi_parser/utils.py`: Utility functions to support parsing.
-- `tests/test_utils.py`: Existing test file for utilities, likely covering basic utility function tests.
+- **[Expand Schema Conversion Tests in Utility Functions](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/10)**
+  - **Action**: Add test cases in `test_utils.py` to verify schema conversion functions handle all input types accurately.
 
-### Action Plan
-- **[ ] Schema Conversion Tests**:
-  - Identify conversion functions in `utils.py` and add schema type tests.
-  - Use variations from `tests/data/external_schema.yaml` for schema conversion edge cases.
-  
-- **[ ] Reference Resolution**:
-  - Confirm handling of `$ref` resolution within utility functions.
-  - Add nested and recursive `$ref` scenarios in test cases to ensure correct function.
-  
-- **[ ] Path Manipulation**:
-  - Expand `test_utils.py` with test cases that simulate complex path structures (from `openapi.yaml`).
+- **[Develop Reference Resolution Tests for Utility Functions](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/11)**
+  - **Action**: Expand tests for `$ref` handling, covering both nested and recursive references.
+
+- **[Add Path Manipulation Tests for Utility Functions](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/12)**
+  - **Action**: Test the utility functions' handling of complex path structures.
+
+- **[Implement Edge Case Tests for Utility Functions](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/13)**
+  - **Action**: Add tests for unusual or unexpected inputs to verify that utility functions are resilient.
 
 ---
 
-## 4. Add Integration Tests for Full Parser Workflow
+## 4. Integration Tests for Full Parser Workflow
 
-> **Objective**: Validate end-to-end parsing of OpenAPI documents using integration tests.
+> **Objective**: Confirm that the entire parser workflow can handle full OpenAPI documents, nested structures, and error cases.
 
-### Existing Files to Leverage
-- `tests/test_integration.py`: Likely exists for end-to-end testing of the parser on full OpenAPI documents.
+- **[Expand Integration Tests for Full OpenAPI File Parsing](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/14)**
+  - **Action**: Add end-to-end tests to `test_integration.py` to validate complete OpenAPI 3.1 documents.
 
-### Action Plan
-- **[ ] Full Document Parsing**:
-  - Expand `test_integration.py` with additional OpenAPI samples to test comprehensive parsing (e.g., external references, complex schemas).
-  
-- **[ ] Nested and Recursive References**:
-  - Simulate deep `$ref` chains within `tests/data/openapi.yaml` and confirm accurate parsing.
-  
-- **[ ] Error Handling Across Workflow**:
-  - Test invalid documents with different error types to validate parser robustness.
-  - Ensure `test_integration.py` triggers appropriate error handling responses.
+- **[Develop Nested Reference Parsing Tests](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/15)**
+  - **Action**: Ensure the parser accurately resolves deep and recursive `$ref` references within the full document.
+
+- **[Develop Error Handling Tests for Integration Workflow](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/16)**
+  - **Action**: Add tests that validate the parser’s error handling for invalid or partially valid documents.
+
+- **[Add Parameter and Response Extraction Tests](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/17)**
+  - **Action**: Confirm that the parser accurately extracts parameters and responses from the document.
 
 ---
 
-## 5. Enhance Exception Handling Tests
+## 5. Exception Handling Tests
 
-> **Objective**: Ensure meaningful error handling for all custom exceptions, facilitating debugging.
+> **Objective**: Ensure each custom exception in `exceptions.py` is correctly raised, with clear and informative error messages.
 
-### Existing Files to Leverage
-- `fountainai_openapi_parser/exceptions.py`: Custom exception classes for parsing errors.
-- `tests/test_parser.py` and `tests/test_utils.py`: Extend these files to include exception-specific tests.
+- **[Test Each Custom Exception for Error Handling](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/18)**
+  - **Action**: Write tests for each custom exception to verify accurate error handling in `exceptions.py`.
 
-### Action Plan
-- **[ ] Custom Exception Testing**:
-  - Review each class in `exceptions.py`, identify unique error scenarios, and create unit tests to validate each exception type.
-  
-- **[ ] Scenario-Based Error Handling**:
-  - Add cases in `test_parser.py` and `test_utils.py` that trigger exceptions.
-  - Confirm that each exception provides a clear error message and does not stop the test suite unexpectedly.
+- **[Add Scenario-Based Tests for Exception Handling](https://github.com/Contexter/FountainAI-OpenAPI-Parser/issues/19)**
+  - **Action**: Develop tests in `test_parser.py` and `test_utils.py` that trigger each custom exception in various scenarios.
 
 ---
 
-## 6. Implement Code Coverage and Reporting
-
-> **Objective**: Integrate continuous code coverage reporting into CI/CD to monitor test effectiveness.
-
-### Existing Files to Leverage
-- `.github/workflows/ci.yml`: GitHub Actions workflow for CI/CD, which can be expanded to include coverage reporting.
-- `FountainAI-OpenAPI-Parser Testing Plan.md`: Update this file with details on the coverage strategy.
-
-### Action Plan
-- **[ ] Set Up Coverage Tool**:
-  - Install `coverage.py` and configure it to report on `fountainai_openapi_parser/` and `tests/`.
-  
-- **[ ] CI Integration**:
-  - Update `ci.yml` to include a step that generates and reports coverage results.
-  
-- **[ ] Generate Detailed Coverage Reports**:
-  - Ensure reports include breakdowns by module and line coverage, highlighting gaps.
-  
-- **[ ] Coverage Badge in README**:
-  - Add a badge to `README.md` showing the latest coverage percentage, ensuring it updates automatically.
-
-- **[ ] Set Coverage Thresholds**:
-  - Configure the CI workflow to fail if coverage drops below a certain threshold, maintaining test standards.
-
----
-
-This plan addresses specific testing needs within the repository’s current structure and content, establishing a clear path to ensure high test coverage, isolated tests, and reliable error handling. This approach not only boosts confidence in the parser’s functionality but also lays a solid foundation for future maintenance and improvements.
+This linked plan provides a clear and actionable roadmap, allowing developers and contributors to focus on each testing task systematically. The corresponding GitHub issues facilitate tracking and help ensure that each item in the plan is executed effectively.
