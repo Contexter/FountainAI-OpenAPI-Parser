@@ -7,19 +7,19 @@ from .exceptions import ReferenceResolutionError
 
 def load_file(source: Union[str, Path], encoding: str = "utf-8") -> str:
     """
-        Loads the content of a file from a given path or string.
+    Loads the content of a file from a given path or string.
 
-        Args:
-            source (Union[str, Path]): The file path or content as a string.
-    encoding (str, optional): The encoding of the file if a file path is provided.
-    Defaults to 'utf-8'.
+    Args:
+        source (Union[str, Path]): The file path or content as a string.
+        encoding (str, optional): The encoding of the file if a file path is
+            provided. Defaults to 'utf-8'.
 
-        Returns:
-            str: The content of the file.
+    Returns:
+        str: The content of the file.
 
-        Raises:
-            FileNotFoundError: If the provided file path does not exist.
-            IOError: If there is an issue reading the file.
+    Raises:
+        FileNotFoundError: If the provided file path does not exist.
+        IOError: If there is an issue reading the file.
     """
     if isinstance(source, Path) or Path(source).exists():
         try:
@@ -34,34 +34,37 @@ def load_file(source: Union[str, Path], encoding: str = "utf-8") -> str:
 
 
 def resolve_references(
-    openapi_instance: Dict[str, Any], base_path: Union[str, Path] = ""
+    openapi_instance: Dict[str, Any],
+    base_path: Union[str, Path] = ""
 ) -> Dict[str, Any]:
     """
-        Resolves $ref references within an OpenAPI document.
+    Resolves $ref references within an OpenAPI document.
 
     Args:
-    openapi_instance (Dict[str, Any]): The parsed OpenAPI document as a
-    dictionary.
-            base_path (Union[str, Path], optional): The base path to resolve external references. Defaults to "".
+        openapi_instance (Dict[str, Any]): The parsed OpenAPI document as a
+            dictionary.
+        base_path (Union[str, Path], optional): The base path to resolve external
+            references. Defaults to "".
 
-        Returns:
-            Dict[str, Any]: The OpenAPI document with references resolved.
+    Returns:
+        Dict[str, Any]: The OpenAPI document with references resolved.
 
-        Raises:
-            ReferenceResolutionError: If there is an issue resolving references.
+    Raises:
+        ReferenceResolutionError: If there is an issue resolving references.
     """
     try:
 
         def resolve(node: Any, path: str = "") -> Any:
             """
-                        Recursively resolves references within the OpenAPI document.
+            Recursively resolves references within the OpenAPI document.
 
             Args:
-                            node (Any): The current node in the OpenAPI document.
-                            path (str, optional): The current path of the node being resolved. Defaults to "".
+                node (Any): The current node in the OpenAPI document.
+                path (str, optional): The current path of the node being resolved.
+                    Defaults to "".
 
-                        Returns:
-                            Any: The resolved node.
+            Returns:
+                Any: The resolved node.
             """
             if isinstance(node, dict):
                 if "$ref" in node:
