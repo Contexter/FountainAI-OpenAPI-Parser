@@ -29,7 +29,7 @@ yaml_files = {
                                         "type": "object",
                                         "properties": {
                                             "example_field": {"type": "string"}
-                                        }
+                                        },
                                     }
                                 }
                             }
@@ -42,21 +42,17 @@ yaml_files = {
             "schemas": {
                 "ExampleSchema": {
                     "type": "object",
-                    "properties": {
-                        "example_field": {"type": "string"}
-                    }
+                    "properties": {"example_field": {"type": "string"}},
                 }
             }
-        }
+        },
     },
     "external_schema.yaml": {
         "components": {
             "schemas": {
                 "ExampleSchema": {
                     "type": "object",
-                    "properties": {
-                        "example_field": {"type": "string"}
-                    }
+                    "properties": {"example_field": {"type": "string"}},
                 }
             }
         }
@@ -64,21 +60,22 @@ yaml_files = {
     "invalid_openapi.yaml": {
         "openapi": "3.0.0",
         "info": {"title": "Invalid API", "version": "1.0.0"},
-        "paths": "invalid_content"
-    }
+        "paths": "invalid_content",
+    },
 }
 
 # Write YAML files
 for filename, data in yaml_files.items():
     file_path = test_data_dir / filename
-    with open(file_path, 'w') as file:
+    with open(file_path, "w") as file:
         yaml.dump(data, file)
     logging.info(f"Created YAML file at: {file_path}")
 
 # Create fresh test files
 # test_parser.py
-with open(test_files_dir / "test_parser.py", 'w') as f:
-    f.write("""
+with open(test_files_dir / "test_parser.py", "w") as f:
+    f.write(
+        """
 import unittest
 from fountainai_openapi_parser.parser import parse_openapi
 from fountainai_openapi_parser.exceptions import ValidationError
@@ -99,11 +96,13 @@ class TestParser(unittest.TestCase):
     def test_parse_invalid_openapi_yaml(self):
         with self.assertRaises(ValidationError):
             parse_openapi(self.invalid_openapi_yaml)
-    """)
+    """
+    )
 
 # test_integration.py
-with open(test_files_dir / "test_integration.py", 'w') as f:
-    f.write("""
+with open(test_files_dir / "test_integration.py", "w") as f:
+    f.write(
+        """
 import unittest
 from fountainai_openapi_parser.utils import resolve_references
 import yaml
@@ -117,11 +116,13 @@ class TestIntegration(unittest.TestCase):
     def test_external_reference_resolution(self):
         resolved_result = resolve_references(self.openapi_yaml, base_path=Path(__file__).parent / "data")
         self.assertIn("example_field", resolved_result["components"]["schemas"]["ExampleSchema"]["properties"])
-    """)
+    """
+    )
 
 # test_utils.py
-with open(test_files_dir / "test_utils.py", 'w') as f:
-    f.write("""
+with open(test_files_dir / "test_utils.py", "w") as f:
+    f.write(
+        """
 import unittest
 from fountainai_openapi_parser.utils import resolve_references
 import yaml
@@ -135,6 +136,7 @@ class TestUtils(unittest.TestCase):
     def test_resolve_external_reference(self):
         resolved_data = resolve_references(self.external_ref_yaml, base_path=Path(__file__).parent / "data")
         self.assertIn("example_field", resolved_data["components"]["schemas"]["ExampleSchema"]["properties"])
-    """)
+    """
+    )
 
 logging.info("Test files recreated with correct structure.")

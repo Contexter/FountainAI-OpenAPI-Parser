@@ -5,7 +5,7 @@ from typing import Union, Dict, Any
 from .exceptions import ReferenceResolutionError
 
 
-def load_file(source: Union[str, Path], encoding: str = 'utf-8') -> str:
+def load_file(source: Union[str, Path], encoding: str = "utf-8") -> str:
     """
     Loads the content of a file from a given path or string.
 
@@ -22,7 +22,7 @@ def load_file(source: Union[str, Path], encoding: str = 'utf-8') -> str:
     """
     if isinstance(source, Path) or Path(source).exists():
         try:
-            with open(source, 'r', encoding=encoding) as f:
+            with open(source, "r", encoding=encoding) as f:
                 return f.read()
         except FileNotFoundError as e:
             raise FileNotFoundError(f"File not found: {str(e)}")
@@ -32,7 +32,9 @@ def load_file(source: Union[str, Path], encoding: str = 'utf-8') -> str:
         return source
 
 
-def resolve_references(openapi_instance: Dict[str, Any], base_path: Union[str, Path] = "") -> Dict[str, Any]:
+def resolve_references(
+    openapi_instance: Dict[str, Any], base_path: Union[str, Path] = ""
+) -> Dict[str, Any]:
     """
     Resolves $ref references within an OpenAPI document.
 
@@ -47,6 +49,7 @@ def resolve_references(openapi_instance: Dict[str, Any], base_path: Union[str, P
         ReferenceResolutionError: If there is an issue resolving references.
     """
     try:
+
         def resolve(node: Any, path: str = "") -> Any:
             """
             Recursively resolves references within the OpenAPI document.
@@ -68,7 +71,9 @@ def resolve_references(openapi_instance: Dict[str, Any], base_path: Union[str, P
                         for part in ref_path:
                             resolved_node = resolved_node.get(part)
                             if resolved_node is None:
-                                raise ReferenceResolutionError(f"Unable to resolve local reference: {ref}")
+                                raise ReferenceResolutionError(
+                                    f"Unable to resolve local reference: {ref}"
+                                )
                         return resolve(resolved_node, path)
                     else:
                         # External reference
@@ -80,12 +85,20 @@ def resolve_references(openapi_instance: Dict[str, Any], base_path: Union[str, P
                             external_data = json.loads(external_content)
                         return resolve(external_data, str(external_path))
                 else:
-                    return {key: resolve(value, path + f"/{key}") for key, value in node.items()}
+                    return {
+                        key: resolve(value, path + f"/{key}")
+                        for key, value in node.items()
+                    }
             elif isinstance(node, list):
-                return [resolve(item, path + f"/[{i}]") for i, item in enumerate(node)]
+                return [
+                    resolve(item, path + f"/[{i}]")
+                    for i, item in enumerate(node)
+                ]
             else:
                 return node
 
         return resolve(openapi_instance)
     except Exception as e:
-        raise ReferenceResolutionError(f"Failed to resolve references: {str(e)}")
+        raise ReferenceResolutionError(
+            f"Failed to resolve references: {str(e)}"
+        )

@@ -43,5 +43,6 @@ for step, description in steps.items():
     with open(readme_path, "w") as readme_file:
         readme_file.write(f"# {step}\n\n{description}")
 
-print("Prompts directory structured successfully with step-specific README files.")
-
+print(
+    "Prompts directory structured successfully with step-specific README files."
+)

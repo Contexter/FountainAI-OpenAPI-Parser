@@ -1,6 +1,7 @@
 import unittest
 from fountainai_openapi_parser.parser import parse_openapi, OpenAPI
 
+
 class TestParser(unittest.TestCase):
 
     def setUp(self):
@@ -18,22 +19,24 @@ class TestParser(unittest.TestCase):
                                         "schema": {
                                             "type": "object",
                                             "properties": {
-                                                "example_field": {"type": "string"}
-                                            }
+                                                "example_field": {
+                                                    "type": "string"
+                                                }
+                                            },
                                         }
                                     }
-                                }
+                                },
                             }
                         }
                     }
                 }
-            }
+            },
         }
 
         self.invalid_openapi_yaml = {
             "openapi": "3.0.0",
             "info": "Invalid structure",
-            "paths": "invalid_content"
+            "paths": "invalid_content",
         }
 
     def test_parse_valid_openapi_yaml(self):
@@ -41,13 +44,16 @@ class TestParser(unittest.TestCase):
         self.assertIsInstance(parsed, OpenAPI)
         self.assertIn("/example", parsed.paths)
         self.assertEqual(
-            parsed.paths["/example"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["type"],
-            "object"
+            parsed.paths["/example"]["get"]["responses"]["200"]["content"][
+                "application/json"
+            ]["schema"]["type"],
+            "object",
         )
 
     def test_parse_invalid_openapi_yaml(self):
         with self.assertRaises(ValueError):
             parse_openapi(self.invalid_openapi_yaml)
+
 
 if __name__ == "__main__":
     unittest.main()

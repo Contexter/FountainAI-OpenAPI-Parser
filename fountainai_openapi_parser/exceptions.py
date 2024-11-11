@@ -5,6 +5,7 @@ class ParsingError(Exception):
     Attributes:
         message (str): Description of the parsing error.
     """
+
     def __init__(self, message: str):
         super().__init__(message)
         self.message = message
@@ -17,6 +18,7 @@ class ValidationError(Exception):
     Attributes:
         message (str): Description of the validation error.
     """
+
     def __init__(self, message: str):
         super().__init__(message)
         self.message = message
@@ -29,6 +31,7 @@ class ReferenceResolutionError(Exception):
     Attributes:
         message (str): Description of the reference resolution error.
     """
+
     def __init__(self, message: str):
         super().__init__(message)
         self.message = message

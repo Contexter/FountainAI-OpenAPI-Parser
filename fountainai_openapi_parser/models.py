@@ -77,12 +77,12 @@ class ExternalDocumentation(BaseModel):
 class Tag(BaseModel):
     name: str
     description: Optional[str] = None
-    externalDocs: Optional['ExternalDocumentation'] = None  # Forward reference
+    externalDocs: Optional["ExternalDocumentation"] = None  # Forward reference
 
 
 # A simple object to allow referencing other components
 class Reference(BaseModel):
-    ref: str = Field(..., alias='$ref')
+    ref: str = Field(..., alias="$ref")
     summary: Optional[str] = None
     description: Optional[str] = None
 
@@ -108,7 +108,7 @@ class Discriminator(BaseModel):
 # A single encoding definition applied to a single schema property
 class Encoding(BaseModel):
     contentType: Optional[str] = None
-    headers: Optional[Dict[str, Union['Header', Reference]]] = None
+    headers: Optional[Dict[str, Union["Header", Reference]]] = None
     style: Optional[Style] = None
     explode: Optional[bool] = None
     allowReserved: Optional[bool] = None
@@ -124,7 +124,7 @@ class Example(BaseModel):
 
 # Each Media Type object provides schema and examples for the media type identified by its key
 class MediaType(BaseModel):
-    schema_data: Optional[Union['Schema', Reference]] = None
+    schema_data: Optional[Union["Schema", Reference]] = None
     example: Optional[Any] = None
     examples: Optional[Dict[str, Union[Example, Reference]]] = None
     encoding: Optional[Dict[str, Encoding]] = None
@@ -132,7 +132,7 @@ class MediaType(BaseModel):
 
 # The Schema Object allows the definition of input and output data types
 class Schema(BaseModel):
-    ref: Optional[str] = Field(default=None, alias='$ref')
+    ref: Optional[str] = Field(default=None, alias="$ref")
 
     # Metadata
     title: Optional[str] = None
@@ -151,7 +151,7 @@ class Schema(BaseModel):
     pattern: Optional[str] = None
     contentMediaType: Optional[str] = None
     contentEncoding: Optional[str] = None
-    contentSchema: Optional['Schema'] = None
+    contentSchema: Optional["Schema"] = None
 
     # Number-specific properties
     multipleOf: Optional[float] = None
@@ -161,36 +161,36 @@ class Schema(BaseModel):
     exclusiveMinimum: Optional[float] = None
 
     # Array-specific properties
-    items: Optional[Union['Schema', List['Schema']]] = None
-    prefixItems: Optional[List['Schema']] = None
-    contains: Optional['Schema'] = None
+    items: Optional[Union["Schema", List["Schema"]]] = None
+    prefixItems: Optional[List["Schema"]] = None
+    contains: Optional["Schema"] = None
     maxItems: Optional[int] = None
     minItems: Optional[int] = None
     uniqueItems: Optional[bool] = None
     maxContains: Optional[int] = None
     minContains: Optional[int] = None
-    unevaluatedItems: Optional[Union['Schema', bool]] = None
+    unevaluatedItems: Optional[Union["Schema", bool]] = None
 
     # Object-specific properties
-    properties: Optional[Dict[str, 'Schema']] = None
-    patternProperties: Optional[Dict[str, 'Schema']] = None
-    additionalProperties: Optional[Union['Schema', bool]] = None
+    properties: Optional[Dict[str, "Schema"]] = None
+    patternProperties: Optional[Dict[str, "Schema"]] = None
+    additionalProperties: Optional[Union["Schema", bool]] = None
     maxProperties: Optional[int] = None
     minProperties: Optional[int] = None
     required: Optional[List[str]] = None
     dependentRequired: Optional[Dict[str, List[str]]] = None
-    dependentSchemas: Optional[Dict[str, 'Schema']] = None
-    propertyNames: Optional['Schema'] = None
-    unevaluatedProperties: Optional[Union['Schema', bool]] = None
+    dependentSchemas: Optional[Dict[str, "Schema"]] = None
+    propertyNames: Optional["Schema"] = None
+    unevaluatedProperties: Optional[Union["Schema", bool]] = None
 
     # Conditional and logical keywords
-    allOf: Optional[List['Schema']] = None
-    anyOf: Optional[List['Schema']] = None
-    oneOf: Optional[List['Schema']] = None
-    not_: Optional['Schema'] = Field(default=None, alias='not')
-    if_: Optional['Schema'] = Field(default=None, alias='if')
-    then: Optional['Schema'] = None
-    else_: Optional['Schema'] = Field(default=None, alias='else')
+    allOf: Optional[List["Schema"]] = None
+    anyOf: Optional[List["Schema"]] = None
+    oneOf: Optional[List["Schema"]] = None
+    not_: Optional["Schema"] = Field(default=None, alias="not")
+    if_: Optional["Schema"] = Field(default=None, alias="if")
+    then: Optional["Schema"] = None
+    else_: Optional["Schema"] = Field(default=None, alias="else")
 
     # Enumeration and constant values
     enum: Optional[List[Any]] = None
@@ -215,7 +215,7 @@ class Schema(BaseModel):
 # Describes a single operation parameter
 class Parameter(BaseModel):
     name: str
-    in_: ParameterLocation = Field(..., alias='in')
+    in_: ParameterLocation = Field(..., alias="in")
     description: Optional[str] = None
     required: Optional[bool] = None
     deprecated: Optional[bool] = None
@@ -242,9 +242,9 @@ class RequestBody(BaseModel):
 # Describes a single response from an API Operation
 class Response(BaseModel):
     description: str
-    headers: Optional[Dict[str, Union['Header', Reference]]] = None
+    headers: Optional[Dict[str, Union["Header", Reference]]] = None
     content: Optional[Dict[str, MediaType]] = None
-    links: Optional[Dict[str, Union['Link', Reference]]] = None
+    links: Optional[Dict[str, Union["Link", Reference]]] = None
 
 
 # The Link object represents a possible design-time link for a response
@@ -273,7 +273,7 @@ class Header(BaseModel):
 
 
 # A map of possible out-of-band callbacks related to the parent operation
-class Callback(RootModel[Dict[str, Union['PathItem', Reference]]]):
+class Callback(RootModel[Dict[str, Union["PathItem", Reference]]]):
     pass
 
 
@@ -282,10 +282,10 @@ class SecurityScheme(BaseModel):
     type: SecuritySchemeType
     description: Optional[str] = None
     name: Optional[str] = None
-    in_: Optional[ParameterLocation] = Field(default=None, alias='in')
+    in_: Optional[ParameterLocation] = Field(default=None, alias="in")
     scheme: Optional[str] = None
     bearerFormat: Optional[str] = None
-    flows: Optional['OAuthFlows'] = None
+    flows: Optional["OAuthFlows"] = None
     openIdConnectUrl: Optional[AnyUrl] = None
 
     class Config:
@@ -294,10 +294,10 @@ class SecurityScheme(BaseModel):
 
 # Allows configuration of the supported OAuth Flows
 class OAuthFlows(BaseModel):
-    implicit: Optional['OAuthFlow'] = None
-    password: Optional['OAuthFlow'] = None
-    clientCredentials: Optional['OAuthFlow'] = None
-    authorizationCode: Optional['OAuthFlow'] = None
+    implicit: Optional["OAuthFlow"] = None
+    password: Optional["OAuthFlow"] = None
+    clientCredentials: Optional["OAuthFlow"] = None
+    authorizationCode: Optional["OAuthFlow"] = None
 
 
 # Configuration details for a supported OAuth Flow
@@ -320,13 +320,15 @@ class Operation(BaseModel):
     responses: Dict[str, Union[Response, Reference]]
     callbacks: Optional[Dict[str, Union[Callback, Reference]]] = None
     deprecated: Optional[bool] = None
-    security: Optional[List[Dict[str, List[str]]]] = None  # List of SecurityRequirement
+    security: Optional[List[Dict[str, List[str]]]] = (
+        None  # List of SecurityRequirement
+    )
     servers: Optional[List[Server]] = None
 
 
 # Describes the operations available on a single path
 class PathItem(BaseModel):
-    ref: Optional[str] = Field(default=None, alias='$ref')
+    ref: Optional[str] = Field(default=None, alias="$ref")
     summary: Optional[str] = None
     description: Optional[str] = None
     get: Optional[Operation] = None
@@ -352,7 +354,9 @@ class Components(BaseModel):
     examples: Optional[Dict[str, Union[Example, Reference]]] = None
     requestBodies: Optional[Dict[str, Union[RequestBody, Reference]]] = None
     headers: Optional[Dict[str, Union[Header, Reference]]] = None
-    securitySchemes: Optional[Dict[str, Union[SecurityScheme, Reference]]] = None
+    securitySchemes: Optional[Dict[str, Union[SecurityScheme, Reference]]] = (
+        None
+    )
     links: Optional[Dict[str, Union[Link, Reference]]] = None
     callbacks: Optional[Dict[str, Union[Callback, Reference]]] = None
     pathItems: Optional[Dict[str, Union[PathItem, Reference]]] = None
@@ -367,7 +371,9 @@ class OpenAPI(BaseModel):
     paths: dict
     webhooks: Optional[Dict[str, Union[PathItem, Reference]]] = None
     components: Optional[Components] = None
-    security: Optional[List[Dict[str, List[str]]]] = None  # List of SecurityRequirement
+    security: Optional[List[Dict[str, List[str]]]] = (
+        None  # List of SecurityRequirement
+    )
     tags: Optional[List[Tag]] = None
     externalDocs: Optional[ExternalDocumentation] = None
 

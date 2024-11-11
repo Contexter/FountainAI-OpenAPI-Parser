@@ -6,7 +6,9 @@ from fountainai_openapi_parser.parser import OpenAPI
 from fountainai_openapi_parser.utils import load_file
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 def check_file_exists(filepath):
@@ -21,7 +23,7 @@ def check_file_exists(filepath):
 def validate_openapi_structure(filepath):
     """Validate the structure of the OpenAPI YAML file for compatibility with Pydantic."""
     try:
-        with open(filepath, 'r') as file:
+        with open(filepath, "r") as file:
             openapi_data = yaml.safe_load(file)
         openapi_instance = OpenAPI(**openapi_data)
         logging.info(f"OpenAPI structure in {filepath} is valid.")
@@ -41,7 +43,9 @@ def resolve_external_references(filepath, ref_path):
     except FileNotFoundError as e:
         logging.error(f"Missing external reference file: {e}")
     except Exception as e:
-        logging.error(f"Unexpected error in resolving reference {ref_path}: {e}")
+        logging.error(
+            f"Unexpected error in resolving reference {ref_path}: {e}"
+        )
 
 
 def main():

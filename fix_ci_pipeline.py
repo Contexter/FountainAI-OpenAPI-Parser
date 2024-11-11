@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import shutil
 
+
 def add_mock_import_to_tests():
     """Ensure all test files import mock from unittest if they use mocking."""
     test_dir = Path("tests")
@@ -23,7 +24,9 @@ def check_and_update_pydantic_models():
         for line in file:
             # This assumes `paths` field needs to be a dictionary based on the errors seen.
             if "paths:" in line:
-                updated_lines.append("    paths: dict\n")  # Update paths type to dict explicitly
+                updated_lines.append(
+                    "    paths: dict\n"
+                )  # Update paths type to dict explicitly
             else:
                 updated_lines.append(line)
     with open(models_file, "w") as file:
@@ -57,7 +60,9 @@ def modify_test_for_missing_file():
         if "FileNotFoundError" in line:
             # Add handling to mock file loading where `FileNotFoundError` is expected
             updated_content.append("from unittest import mock\n")
-            updated_content.append("import fountainai_openapi_parser.utils as utils\n")
+            updated_content.append(
+                "import fountainai_openapi_parser.utils as utils\n"
+            )
             updated_content.append(
                 "with mock.patch('utils.load_file', return_value={'ExampleSchema': {'type': 'object'}}):\n"
             )
@@ -87,6 +92,7 @@ def main():
     modify_test_for_missing_file()
 
     print("All fixes applied. You can now re-run the CI pipeline.")
+
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+
 def create_github_workflow_directory(directory: str) -> None:
     """
     Ensure that the GitHub workflow directory exists.
@@ -10,11 +11,14 @@ def create_github_workflow_directory(directory: str) -> None:
     try:
         os.makedirs(directory, exist_ok=True)
     except PermissionError as e:
-        print(f"Error: Permission denied while creating directory {directory}. {e}")
+        print(
+            f"Error: Permission denied while creating directory {directory}. {e}"
+        )
         raise
     except OSError as e:
         print(f"Error: Failed to create directory {directory}. {e}")
         raise
+
 
 def write_github_workflow_file(file_path: str, content: str) -> None:
     """
@@ -31,6 +35,7 @@ def write_github_workflow_file(file_path: str, content: str) -> None:
         print(f"Error: Failed to write to file {file_path}. {e}")
         raise
 
+
 def commit_and_push_workflow(file_path: str, commit_message: str) -> None:
     """
     Add the workflow file to Git, commit the changes, and push to the repository.
@@ -46,7 +51,12 @@ def commit_and_push_workflow(file_path: str, commit_message: str) -> None:
 
     try:
         # Check if there are any changes to commit
-        result = subprocess.run(["git", "status", "--porcelain"], check=True, capture_output=True, text=True)
+        result = subprocess.run(
+            ["git", "status", "--porcelain"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
         if result.stdout.strip():
             subprocess.run(["git", "commit", "-m", commit_message], check=True)
         else:
@@ -61,6 +71,7 @@ def commit_and_push_workflow(file_path: str, commit_message: str) -> None:
     except subprocess.CalledProcessError as e:
         print(f"Error: Failed to push changes to the repository. {e}")
         raise
+
 
 def main() -> None:
     """
@@ -112,7 +123,10 @@ def main() -> None:
     write_github_workflow_file(workflow_file_path, github_workflow_content)
 
     # Commit and push the workflow file to the repository
-    commit_and_push_workflow(workflow_file_path, "ci: Add GitHub Actions workflow for CI/CD")
+    commit_and_push_workflow(
+        workflow_file_path, "ci: Add GitHub Actions workflow for CI/CD"
+    )
+
 
 if __name__ == "__main__":
     main()

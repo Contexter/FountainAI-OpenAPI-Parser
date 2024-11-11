@@ -4,29 +4,22 @@ import shutil
 
 logging.basicConfig(level=logging.INFO)
 
+
 def create_project_structure():
     logging.info("Starting to create project structure...")
     project_structure = {
-        'fountainai_openapi_parser': [
-            '__init__.py',
-            'models.py',
-            'parser.py',
-            'utils.py'
+        "fountainai_openapi_parser": [
+            "__init__.py",
+            "models.py",
+            "parser.py",
+            "utils.py",
         ],
-        'tests': [
-            '__init__.py',
-            'test_parser.py'
-        ],
-        '': [
-            'setup.py',
-            'README.md',
-            'LICENSE',
-            'MANIFEST.in'
-        ]
+        "tests": ["__init__.py", "test_parser.py"],
+        "": ["setup.py", "README.md", "LICENSE", "MANIFEST.in"],
     }
 
     for directory, files in project_structure.items():
-        dir_path = Path(directory) if directory else Path('.')
+        dir_path = Path(directory) if directory else Path(".")
         if dir_path.exists() and dir_path.is_dir() and directory:
             logging.info(f"Removing existing directory: {dir_path}")
             shutil.rmtree(dir_path)
@@ -38,30 +31,33 @@ def create_project_structure():
                 logging.info(f"Removing existing file: {file_path}")
                 file_path.unlink()
             try:
-                with file_path.open('w') as f:
+                with file_path.open("w") as f:
                     f.write(get_boilerplate_content(file_name))
                 logging.info(f"Successfully created file: {file_path}")
             except IOError as e:
                 logging.error(f"Error creating file {file_path}: {e}")
 
+
 def get_boilerplate_content(file_name):
     logging.debug(f"Fetching boilerplate content for: {file_name}")
     return {
-        '__init__.py': get_init_boilerplate(),
-        'models.py': get_models_boilerplate(),
-        'parser.py': get_parser_boilerplate(),
-        'utils.py': get_utils_boilerplate(),
-        'test_parser.py': get_test_parser_boilerplate(),
-        'setup.py': get_setup_boilerplate(),
-        'README.md': get_readme_boilerplate(),
-        'LICENSE': get_license_boilerplate(),
-        'MANIFEST.in': get_manifest_boilerplate()
+        "__init__.py": get_init_boilerplate(),
+        "models.py": get_models_boilerplate(),
+        "parser.py": get_parser_boilerplate(),
+        "utils.py": get_utils_boilerplate(),
+        "test_parser.py": get_test_parser_boilerplate(),
+        "setup.py": get_setup_boilerplate(),
+        "README.md": get_readme_boilerplate(),
+        "LICENSE": get_license_boilerplate(),
+        "MANIFEST.in": get_manifest_boilerplate(),
     }.get(file_name, "")
+
 
 def get_init_boilerplate():
     logging.debug("Generating boilerplate for __init__.py")
     return """# Initializes the module
 """
+
 
 def get_models_boilerplate():
     logging.debug("Generating boilerplate for models.py")
@@ -71,11 +67,13 @@ import dataclasses
 
 """
 
+
 def get_parser_boilerplate():
     logging.debug("Generating boilerplate for parser.py")
     return """# Main parsing functions for the OpenAPI parser
 
 """
+
 
 def get_utils_boilerplate():
     logging.debug("Generating boilerplate for utils.py")
@@ -83,12 +81,14 @@ def get_utils_boilerplate():
 
 """
 
+
 def get_test_parser_boilerplate():
     logging.debug("Generating boilerplate for test_parser.py")
     return """# Unit tests for the parser functions
 import pytest
 
 """
+
 
 def get_setup_boilerplate():
     logging.debug("Generating boilerplate for setup.py")
@@ -118,6 +118,7 @@ setup(
 )
 """
 
+
 def get_readme_boilerplate():
     logging.debug("Generating boilerplate for README.md")
     return """# FountainAI OpenAPI Parser
@@ -137,6 +138,7 @@ import fountainai_openapi_parser
 ```
 """
 
+
 def get_license_boilerplate():
     logging.debug("Generating boilerplate for LICENSE")
     return """# License information
@@ -153,6 +155,7 @@ furnished to do so, subject to the following conditions:
 
 ..."""
 
+
 def get_manifest_boilerplate():
     logging.debug("Generating boilerplate for MANIFEST.in")
     return """# Additional files for distribution
@@ -160,8 +163,8 @@ include README.md
 include LICENSE
 """
 
+
 if __name__ == "__main__":
     logging.info("Script started")
     create_project_structure()
     logging.info("Script finished")
-

@@ -6,7 +6,7 @@ from .exceptions import ParsingError, ValidationError, ReferenceResolutionError
 # Set up logging configuration
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 
 logger = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ __all__ = [
     "resolve_references",
     "ParsingError",
     "ValidationError",
-    "ReferenceResolutionError"
+    "ReferenceResolutionError",
 ]
 
 # Example usage of the logger within the package
