@@ -215,7 +215,9 @@ class Schema(BaseModel):
 # Describes a single operation parameter
 class Parameter(BaseModel):
     name: str
-    in_: ParameterLocation = Field(..., alias="in")
+    in_: ParameterLocation = Field(
+        ..., alias="in"
+    )
     description: Optional[str] = None
     required: Optional[bool] = None
     deprecated: Optional[bool] = None
@@ -225,7 +227,9 @@ class Parameter(BaseModel):
     allowReserved: Optional[bool] = None
     schema_data: Optional[Union[Schema, Reference]] = None
     example: Optional[Any] = None
-    examples: Optional[Dict[str, Union[Example, Reference]]] = None
+    examples: Optional[
+        Dict[str, Union[Example, Reference]]
+    ] = None
     content: Optional[Dict[str, MediaType]] = None
 
     class Config:
@@ -242,9 +246,13 @@ class RequestBody(BaseModel):
 # Describes a single response from an API Operation
 class Response(BaseModel):
     description: str
-    headers: Optional[Dict[str, Union["Header", Reference]]] = None
+    headers: Optional[
+        Dict[str, Union["Header", Reference]]
+    ] = None
     content: Optional[Dict[str, MediaType]] = None
-    links: Optional[Dict[str, Union["Link", Reference]]] = None
+    links: Optional[
+        Dict[str, Union["Link", Reference]]
+    ] = None
 
 
 # The Link object represents a possible design-time link for a response
@@ -268,7 +276,9 @@ class Header(BaseModel):
     allowReserved: Optional[bool] = None
     schema_data: Optional[Union[Schema, Reference]] = None
     example: Optional[Any] = None
-    examples: Optional[Dict[str, Union[Example, Reference]]] = None
+    examples: Optional[
+        Dict[str, Union[Example, Reference]]
+    ] = None
     content: Optional[Dict[str, MediaType]] = None
 
 
@@ -282,7 +292,9 @@ class SecurityScheme(BaseModel):
     type: SecuritySchemeType
     description: Optional[str] = None
     name: Optional[str] = None
-    in_: Optional[ParameterLocation] = Field(default=None, alias="in")
+    in_: Optional[ParameterLocation] = Field(
+        default=None, alias="in"
+    )
     scheme: Optional[str] = None
     bearerFormat: Optional[str] = None
     flows: Optional["OAuthFlows"] = None
@@ -315,12 +327,18 @@ class Operation(BaseModel):
     description: Optional[str] = None
     externalDocs: Optional[ExternalDocumentation] = None
     operationId: Optional[str] = None
-    parameters: Optional[List[Union[Parameter, Reference]]] = None
+    parameters: Optional[
+        List[Union[Parameter, Reference]]
+    ] = None
     requestBody: Optional[Union[RequestBody, Reference]] = None
     responses: Dict[str, Union[Response, Reference]]
-    callbacks: Optional[Dict[str, Union[Callback, Reference]]] = None
+    callbacks: Optional[
+        Dict[str, Union[Callback, Reference]]
+    ] = None
     deprecated: Optional[bool] = None
-    security: Optional[List[Dict[str, List[str]]]] = None  # List of SecurityRequirement
+    security: Optional[
+        List[Dict[str, List[str]]]
+    ] = None  # SecurityRequirements
     servers: Optional[List[Server]] = None
 
 
@@ -338,7 +356,9 @@ class PathItem(BaseModel):
     patch: Optional[Operation] = None
     trace: Optional[Operation] = None
     servers: Optional[List[Server]] = None
-    parameters: Optional[List[Union[Parameter, Reference]]] = None
+    parameters: Optional[
+        List[Union[Parameter, Reference]]
+    ] = None
 
     class Config:
         populate_by_name = True
@@ -346,16 +366,36 @@ class PathItem(BaseModel):
 
 # Holds a set of reusable objects for different aspects of the OAS
 class Components(BaseModel):
-    schemas: Optional[Dict[str, Union[Schema, Reference]]] = None
-    responses: Optional[Dict[str, Union[Response, Reference]]] = None
-    parameters: Optional[Dict[str, Union[Parameter, Reference]]] = None
-    examples: Optional[Dict[str, Union[Example, Reference]]] = None
-    requestBodies: Optional[Dict[str, Union[RequestBody, Reference]]] = None
-    headers: Optional[Dict[str, Union[Header, Reference]]] = None
-    securitySchemes: Optional[Dict[str, Union[SecurityScheme, Reference]]] = None
-    links: Optional[Dict[str, Union[Link, Reference]]] = None
-    callbacks: Optional[Dict[str, Union[Callback, Reference]]] = None
-    pathItems: Optional[Dict[str, Union[PathItem, Reference]]] = None
+    schemas: Optional[
+        Dict[str, Union[Schema, Reference]]
+    ] = None
+    responses: Optional[
+        Dict[str, Union[Response, Reference]]
+    ] = None
+    parameters: Optional[
+        Dict[str, Union[Parameter, Reference]]
+    ] = None
+    examples: Optional[
+        Dict[str, Union[Example, Reference]]
+    ] = None
+    requestBodies: Optional[
+        Dict[str, Union[RequestBody, Reference]]
+    ] = None
+    headers: Optional[
+        Dict[str, Union[Header, Reference]]
+    ] = None
+    securitySchemes: Optional[
+        Dict[str, Union[SecurityScheme, Reference]]
+    ] = None
+    links: Optional[
+        Dict[str, Union[Link, Reference]]
+    ] = None
+    callbacks: Optional[
+        Dict[str, Union[Callback, Reference]]
+    ] = None
+    pathItems: Optional[
+        Dict[str, Union[PathItem, Reference]]
+    ] = None
 
 
 # The root document object of the OpenAPI document
@@ -365,9 +405,13 @@ class OpenAPI(BaseModel):
     jsonSchemaDialect: Optional[AnyUrl] = None
     servers: Optional[List[Server]] = None
     paths: dict
-    webhooks: Optional[Dict[str, Union[PathItem, Reference]]] = None
+    webhooks: Optional[
+        Dict[str, Union[PathItem, Reference]]
+    ] = None
     components: Optional[Components] = None
-    security: Optional[List[Dict[str, List[str]]]] = None  # List of SecurityRequirement
+    security: Optional[
+        List[Dict[str, List[str]]]
+    ] = None  # SecurityRequirements
     tags: Optional[List[Tag]] = None
     externalDocs: Optional[ExternalDocumentation] = None
 
