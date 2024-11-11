@@ -1,4 +1,0 @@
-2024-11-10 18:45:56,548 - INFO - Workflow directory already exists at .github/workflows
-2024-11-10 18:45:56,548 - INFO - Loading YAML file: .github/workflows/ci.yml
-2024-11-10 18:45:56,551 - INFO - Workflow file already contains the necessary jobs. Skipping update.
-2024-11-10 18:45:56,551 - INFO - CI/CD pipeline update script completed.
