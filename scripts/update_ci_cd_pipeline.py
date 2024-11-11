@@ -18,7 +18,6 @@ backup_directory = "backups"
 # Ensure backup directory exists
 os.makedirs(backup_directory, exist_ok=True)
 
-
 def backup_file(file_path):
     """Backup a file if it exists to avoid accidental overwrites."""
     if os.path.exists(file_path):
@@ -30,7 +29,6 @@ def backup_file(file_path):
     else:
         logging.info(f"No existing file found for backup at {file_path}")
 
-
 def load_yaml(file_path):
     """Load a YAML file if it exists."""
     if os.path.exists(file_path):
@@ -41,15 +39,12 @@ def load_yaml(file_path):
         logging.warning(f"File not found: {file_path}")
         return None
 
-
 def save_yaml(data, file_path):
-"""Save data as a YAML file, ensuring not to overwrite existing
-configurations."""
+    """Save data as a YAML file, ensuring not to overwrite existing configurations."""
     backup_file(file_path)
     with open(file_path, "w") as file:
         yaml.dump(data, file)
         logging.info(f"Saved YAML configuration to {file_path}")
-
 
 def ensure_workflow_directory():
     """Create the workflow directory if it doesn't exist."""
@@ -57,10 +52,7 @@ def ensure_workflow_directory():
         os.makedirs(workflow_directory)
         logging.info(f"Created workflow directory at {workflow_directory}")
     else:
-        logging.info(
-            f"Workflow directory already exists at {workflow_directory}"
-        )
-
+        logging.info(f"Workflow directory already exists at {workflow_directory}")
 
 def update_workflow():
     """Update or create the GitHub Actions workflow if it does not exist."""
@@ -69,14 +61,10 @@ def update_workflow():
     if current_config is not None:
         # Check for specific keys or elements to avoid redundant changes
         if "jobs" in current_config and "test" in current_config["jobs"]:
-logging.info(
-                "Workflow file already contains the necessary jobs. Skipping update."
-            )
+            logging.info("Workflow file already contains the necessary jobs. Skipping update.")
             return
         else:
-            logging.info(
-                "Updating existing workflow with additional configurations."
-            )
+            logging.info("Updating existing workflow with additional configurations.")
     else:
         logging.info("Creating a new workflow file as none exists.")
 
@@ -114,12 +102,10 @@ logging.info(
     else:
         save_yaml(new_workflow, workflow_file)
 
-
 def main():
     ensure_workflow_directory()
     update_workflow()
     logging.info("CI/CD pipeline update script completed.")
-
 
 if __name__ == "__main__":
     main()
