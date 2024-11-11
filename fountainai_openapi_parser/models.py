@@ -122,8 +122,7 @@ class Example(BaseModel):
     externalValue: Optional[AnyUrl] = None
 
 
-# Each Media Type object provides schema and examples for the media type
-identified by its key
+# Each Media Type object provides schema and examples for the media type identified by its key
 class MediaType(BaseModel):
     schema_data: Optional[Union["Schema", Reference]] = None
     example: Optional[Any] = None
@@ -321,9 +320,7 @@ class Operation(BaseModel):
     responses: Dict[str, Union[Response, Reference]]
     callbacks: Optional[Dict[str, Union[Callback, Reference]]] = None
     deprecated: Optional[bool] = None
-    security: Optional[List[Dict[str, List[str]]]] = (
-        None  # List of SecurityRequirement
-    )
+    security: Optional[List[Dict[str, List[str]]]] = None  # List of SecurityRequirement
     servers: Optional[List[Server]] = None
 
 
@@ -355,9 +352,7 @@ class Components(BaseModel):
     examples: Optional[Dict[str, Union[Example, Reference]]] = None
     requestBodies: Optional[Dict[str, Union[RequestBody, Reference]]] = None
     headers: Optional[Dict[str, Union[Header, Reference]]] = None
-    securitySchemes: Optional[Dict[str, Union[SecurityScheme, Reference]]] = (
-        None
-    )
+    securitySchemes: Optional[Dict[str, Union[SecurityScheme, Reference]]] = None
     links: Optional[Dict[str, Union[Link, Reference]]] = None
     callbacks: Optional[Dict[str, Union[Callback, Reference]]] = None
     pathItems: Optional[Dict[str, Union[PathItem, Reference]]] = None
@@ -372,9 +367,7 @@ class OpenAPI(BaseModel):
     paths: dict
     webhooks: Optional[Dict[str, Union[PathItem, Reference]]] = None
     components: Optional[Components] = None
-    security: Optional[List[Dict[str, List[str]]]] = (
-        None  # List of SecurityRequirement
-    )
+    security: Optional[List[Dict[str, List[str]]]] = None  # List of SecurityRequirement
     tags: Optional[List[Tag]] = None
     externalDocs: Optional[ExternalDocumentation] = None
 
