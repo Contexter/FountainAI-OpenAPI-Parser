@@ -74,8 +74,8 @@ def resolve_references(
                         ref_path = ref[2:].split("/")
                         resolved_node = openapi_instance
                         for part in ref_path:
-                            resolved_node = resolved_node.get(part)
-                            if resolved_node is None:
+                            resolved_node = resolved_node.get(part, {})
+                            if not isinstance(resolved_node, dict):
                                 raise ReferenceResolutionError(
                                     f"Unable to resolve local reference: {ref}"
                                 )
