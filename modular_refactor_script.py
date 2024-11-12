@@ -27,7 +27,7 @@ def split_models():
     # Parse the models.py file using AST to extract class definitions
     models_code = ''.join(models_code_lines)
     tree = ast.parse(models_code)
-    
+
     for node in tree.body:
         if isinstance(node, ast.ClassDef):
             model_name = node.name

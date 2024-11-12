@@ -57,7 +57,7 @@ def load_openapi_from_yaml(yaml_content: str) -> OpenAPI:
         if not isinstance(content, dict):
             # Ensure the loaded content is a dictionary representing the OpenAPI document
             raise ParsingError("YAML content must be a dictionary representing the OpenAPI document.")
-        
+
         # Parse the dictionary as an OpenAPI object
         return parse_openapi(content)
     except (yaml.YAMLError, ValidationError) as e:

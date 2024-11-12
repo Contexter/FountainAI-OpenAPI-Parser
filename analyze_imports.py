@@ -27,7 +27,7 @@ def build_dependency_graph(base_path):
                 files.append((module_name, file_path))
                 imports = find_imports_in_file(file_path)
                 dependency_graph[module_name].update(imports)
-    
+
     return dependency_graph, files
 
 def detect_circular_dependencies(dependency_graph):
@@ -45,7 +45,7 @@ def detect_circular_dependencies(dependency_graph):
 
     for node in dependency_graph:
         visit(node, [])
-    
+
     return circular_dependencies
 
 def resolve_circular_imports(base_path, circular_dependencies):

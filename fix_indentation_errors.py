@@ -12,7 +12,7 @@ def fix_indentation(file_path):
         # Replace tabs with four spaces (standard Python indentation)
         fixed_line = re.sub(r'^\t+', ' ' * 4, line)
         fixed_lines.append(fixed_line)
-    
+
     # Write the fixed lines back to the file
     with open(file_path, 'w') as file:
         file.writelines(fixed_lines)
