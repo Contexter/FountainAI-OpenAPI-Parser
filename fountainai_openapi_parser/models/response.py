@@ -1,6 +1,3 @@
-from typing import Dict, Union, Optional
-from pydantic import BaseModel
-from fountainai_openapi_parser.models import Reference, Header, MediaType, Link
 
 
 class Response(BaseModel):

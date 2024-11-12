@@ -1,14 +1,5 @@
-from typing import Dict, Union, Optional, List
-from pydantic import BaseModel, AnyUrl
-from fountainai_openapi_parser.models import (
-    Info,
-    Server,
-    PathItem,
-    Reference,
-    Components,
-    Tag,
-    ExternalDocumentation,
-)
+from typing import Optional, AnyUrl, List, Dict, Union
+from .models import Info, Server, PathItem, Reference, Components, Tag, ExternalDocumentation
 
 
 class OpenAPI(BaseModel):

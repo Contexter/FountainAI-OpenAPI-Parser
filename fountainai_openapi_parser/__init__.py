@@ -1,19 +1,13 @@
 import logging
 
-from .parser import parse_openapi
-
-from .utils import load_file, resolve_references
-
-from .exceptions import ParsingError, ValidationError, ReferenceResolutionError
-
 
 # Set up logging configuration
 
 logging.basicConfig(
 
-level=logging.INFO,
+    level=logging.INFO,
 
-format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 
 )
 
@@ -23,17 +17,17 @@ logger = logging.getLogger(__name__)
 
 __all__ = [
 
-"parse_openapi",
+    "parse_openapi",
 
-"load_file",
+    "load_file",
 
-"resolve_references",
+    "resolve_references",
 
-"ParsingError",
+    "ParsingError",
 
-"ValidationError",
+    "ValidationError",
 
-"ReferenceResolutionError",
+    "ReferenceResolutionError",
 
 ]
 

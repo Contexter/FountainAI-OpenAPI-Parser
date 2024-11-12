@@ -1,6 +1,5 @@
-from typing import Dict, Union, Optional, List
-from pydantic import BaseModel
-from fountainai_openapi_parser.models import (
+from typing import Optional, List, Union, Dict
+from .models import (
     Reference,
     ExternalDocumentation,
     Parameter,

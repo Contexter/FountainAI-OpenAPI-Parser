@@ -1,5 +1,3 @@
-from enum import Enum
-from pydantic import RootModel
 
 
 class ParameterLocation(str, Enum):

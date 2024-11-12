@@ -1,6 +1,3 @@
-from typing import Dict, Optional
-from pydantic import BaseModel
-from fountainai_openapi_parser.models.mediatype import MediaType
 
 
 class RequestBody(BaseModel):

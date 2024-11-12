@@ -1,6 +1,3 @@
-from typing import Dict, Union, Optional, Any
-from pydantic import BaseModel
-from fountainai_openapi_parser.models import Reference, Style, Schema, Example, MediaType
 
 
 class Header(BaseModel):
