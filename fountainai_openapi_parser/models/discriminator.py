@@ -1,4 +1,7 @@
-    from typing import Dict, Union from pydantic import RootModel
+from typing import Dict, Union from pydantic import RootModel
+
 class Discriminator(BaseModel):
-    propertyName: str
-    mapping: Optional[Dict[str, str]] = None
+
+propertyName: str
+
+mapping: Optional[Dict[str, str]] = None
