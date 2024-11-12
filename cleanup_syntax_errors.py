@@ -1,27 +1,48 @@
-# save as `cleanup_syntax_errors.py` at the root
+# cleanup_syntax_errors.py
+
 import re
-import os
 
-def fix_import_syntax(filepath):
-    with open(filepath, "r") as file:
-        lines = file.readlines()
-
-    # Fix inline import errors and misplaced commas
+def fix_syntax_errors(file_content):
+    # Fix concatenated imports and separate statements without proper delimiters
     fixed_lines = []
-    for line in lines:
-        # Move imports like 'from typing import Dict, Union from pydantic import RootModel' to separate lines
-        if re.search(r"from .+ import .+ from .+ import .+", line):
-            parts = line.split("from")
-            fixed_lines.extend([f"from {part.strip()}" for part in parts if part.strip()])
-        else:
-            fixed_lines.append(line)
+    for line in file_content.splitlines():
+        # Detect concatenated imports without proper separation
+        if re.search(r'from\s+\w+\s+import\s+\w+from\s+', line):
+            line = re.sub(r'from\s+(\w+)\s+import\s+(\w+)from\s+', r'from \1 import \2\nfrom ', line)
 
-    with open(filepath, "w") as file:
-        file.writelines(fixed_lines)
+        # Detect common patterns with improper concatenation in imports
+        if "import" in line and "from" in line:
+            # Ensure there's only one 'from' and 'import' in each line
+            split_line = re.split(r'(from\s+\w+\s+import\s+)', line)
+            if len(split_line) > 2:
+                line = '\n'.join(split_line[i] + split_line[i + 1].strip() for i in range(0, len(split_line) - 1, 2))
 
-# Walk through all .py files
-for root, _, files in os.walk("."):
-    for file in files:
-        if file.endswith(".py"):
-            fix_import_syntax(os.path.join(root, file))
+        fixed_lines.append(line)
 
+    return '\n'.join(fixed_lines)
+
+
+def process_file(file_path):
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    fixed_content = fix_syntax_errors(content)
+
+    with open(file_path, 'w') as file:
+        file.write(fixed_content)
+
+
+def main():
+    import os
+
+    # Define the directory where we need to process files
+    directory = "fountainai_openapi_parser"
+
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file.endswith(".py"):
+                process_file(os.path.join(root, file))
+
+
+if __name__ == "__main__":
+    main()
