@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.link import link
+    from fountainai_openapi_parser.models.link import link
 
 class Testlink(unittest.TestCase):
     def test_initialization(self):

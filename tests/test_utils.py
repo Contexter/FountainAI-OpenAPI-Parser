@@ -1,7 +1,7 @@
 import unittest
-from fountainai_openapi_parser.utils import resolve_references
+    from fountainai_openapi_parser.utils import resolve_references
 import yaml
-from pathlib import Path
+    from pathlib import Path
 
 
 class TestUtils(unittest.TestCase):

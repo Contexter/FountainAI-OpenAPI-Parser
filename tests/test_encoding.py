@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.encoding import encoding
+    from fountainai_openapi_parser.models.encoding import encoding
 
 class Testencoding(unittest.TestCase):
     def test_initialization(self):

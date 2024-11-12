@@ -1,7 +1,7 @@
 import logging
-from .parser import parse_openapi
-from .utils import load_file, resolve_references
-from .exceptions import ParsingError, ValidationError, ReferenceResolutionError
+    from .parser import parse_openapi
+    from .utils import load_file, resolve_references
+    from .exceptions import ParsingError, ValidationError, ReferenceResolutionError
 
 # Set up logging configuration
 logging.basicConfig(

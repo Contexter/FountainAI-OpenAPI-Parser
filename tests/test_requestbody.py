@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.requestbody import requestbody
+    from fountainai_openapi_parser.models.requestbody import requestbody
 
 class Testrequestbody(unittest.TestCase):
     def test_initialization(self):

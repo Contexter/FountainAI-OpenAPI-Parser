@@ -1,4 +1,4 @@
-from typing import Dict, Union from pydantic import RootModel
+    from typing import Dict, Union from pydantic import RootModel
 class ParameterLocation(str, Enum):
     QUERY = "query"
     HEADER = "header"

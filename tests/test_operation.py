@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.operation import operation
+    from fountainai_openapi_parser.models.operation import operation
 
 class Testoperation(unittest.TestCase):
     def test_initialization(self):

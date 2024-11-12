@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.oauthflow import oauthflow
+    from fountainai_openapi_parser.models.oauthflow import oauthflow
 
 class Testoauthflow(unittest.TestCase):
     def test_initialization(self):

@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.securityschemetype import securityschemetype
+    from fountainai_openapi_parser.models.securityschemetype import securityschemetype
 
 class Testsecurityschemetype(unittest.TestCase):
     def test_initialization(self):

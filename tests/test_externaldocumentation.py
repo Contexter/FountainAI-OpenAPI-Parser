@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.externaldocumentation import externaldocumentation
+    from fountainai_openapi_parser.models.externaldocumentation import externaldocumentation
 
 class Testexternaldocumentation(unittest.TestCase):
     def test_initialization(self):

@@ -1,5 +1,5 @@
 import os
-from string import Template
+    from string import Template
 import ast
 
 # Define the base paths for the parser and test directories
@@ -87,7 +87,7 @@ def create_unit_tests():
 
     test_template = Template("""
 import unittest
-from fountainai_openapi_parser.models.$model_name import $model_name
+    from fountainai_openapi_parser.models.$model_name import $model_name
 
 class Test$model_name(unittest.TestCase):
     def test_initialization(self):

@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.discriminator import discriminator
+    from fountainai_openapi_parser.models.discriminator import discriminator
 
 class Testdiscriminator(unittest.TestCase):
     def test_initialization(self):

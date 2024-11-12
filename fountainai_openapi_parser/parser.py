@@ -1,11 +1,11 @@
-from .models.assemble import get_models
+    from .models.assemble import get_models
 import yaml
 import logging
-from typing import Any, Dict, Optional
-from pydantic import ValidationError
-from pydantic import BaseModel, Field
-from fountainai_openapi_parser.models import OpenAPI, Components, Info, Paths
-from fountainai_openapi_parser.exceptions import ParsingError, ReferenceResolutionError
+    from typing import Any, Dict, Optional
+    from pydantic import ValidationError
+    from pydantic import BaseModel, Field
+    from fountainai_openapi_parser.models import OpenAPI, Components, Info, Paths
+    from fountainai_openapi_parser.exceptions import ParsingError, ReferenceResolutionError
 import codecs
 
 # Configure logging

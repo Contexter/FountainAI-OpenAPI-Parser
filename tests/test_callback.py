@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.callback import callback
+    from fountainai_openapi_parser.models.callback import callback
 
 class Testcallback(unittest.TestCase):
     def test_initialization(self):

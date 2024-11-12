@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.tag import tag
+    from fountainai_openapi_parser.models.tag import tag
 
 class Testtag(unittest.TestCase):
     def test_initialization(self):

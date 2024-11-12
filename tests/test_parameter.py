@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.parameter import parameter
+    from fountainai_openapi_parser.models.parameter import parameter
 
 class Testparameter(unittest.TestCase):
     def test_initialization(self):

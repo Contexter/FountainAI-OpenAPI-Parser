@@ -1,5 +1,5 @@
-from fountainai_openapi_parser.models import Reference
-from typing import Dict, Union from pydantic import RootModel
+    from fountainai_openapi_parser.models import Reference
+    from typing import Dict, Union from pydantic import RootModel
 class Operation(BaseModel):
     tags: Optional[List[str]] = None
     summary: Optional[str] = None

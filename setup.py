@@ -1,5 +1,5 @@
 # Setup configuration for pip installation
-from setuptools import setup, find_packages
+    from setuptools import setup, find_packages
 
 setup(
     name="FountainAI-OpenAPI-Parser",

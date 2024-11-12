@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.info import info
+    from fountainai_openapi_parser.models.info import info
 
 class Testinfo(unittest.TestCase):
     def test_initialization(self):

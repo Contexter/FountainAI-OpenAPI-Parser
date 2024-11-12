@@ -1,6 +1,6 @@
-from fountainai_openapi_parser.models import PathItem
-from fountainai_openapi_parser.models import Reference
-from typing import Dict, Union from pydantic import RootModel
+    from fountainai_openapi_parser.models import PathItem
+    from fountainai_openapi_parser.models import Reference
+    from typing import Dict, Union from pydantic import RootModel
 class Components(BaseModel):
     schemas: Optional[Dict[str, Union[Schema, Reference]]] = None
     responses: Optional[Dict[str, Union[Response, Reference]]] = None

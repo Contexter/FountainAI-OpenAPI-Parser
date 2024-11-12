@@ -1,8 +1,8 @@
-from pathlib import Path
+    from pathlib import Path
 import yaml
 import json
-from typing import Union, Dict, Any
-from .exceptions import ReferenceResolutionError
+    from typing import Union, Dict, Any
+    from .exceptions import ReferenceResolutionError
 
 
 def load_file(source: Union[str, Path], encoding: str = "utf-8") -> str:

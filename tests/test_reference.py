@@ -1,6 +1,6 @@
 
 import unittest
-from fountainai_openapi_parser.models.reference import reference
+    from fountainai_openapi_parser.models.reference import reference
 
 class Testreference(unittest.TestCase):
     def test_initialization(self):

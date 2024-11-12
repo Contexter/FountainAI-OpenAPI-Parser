@@ -1,6 +1,6 @@
-from fountainai_openapi_parser.models import PathItem
-from fountainai_openapi_parser.models import Reference
-from typing import Dict, Union from pydantic import RootModel
+    from fountainai_openapi_parser.models import PathItem
+    from fountainai_openapi_parser.models import Reference
+    from typing import Dict, Union from pydantic import RootModel
 class OpenAPI(BaseModel):
     openapi: str
     info: Info

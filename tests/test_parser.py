@@ -1,6 +1,6 @@
 import unittest
-from fountainai_openapi_parser.parser import parse_openapi, OpenAPI
-from fountainai_openapi_parser.exceptions import ParsingError, ValidationError, ReferenceResolutionError
+    from fountainai_openapi_parser.parser import parse_openapi, OpenAPI
+    from fountainai_openapi_parser.exceptions import ParsingError, ValidationError, ReferenceResolutionError
 
 # Issue #41: Added tests to validate the basic parsing of `openapi.yaml` for standard OpenAPI documents as part of foundational core parser functionality.
 
