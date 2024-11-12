@@ -1,3 +1,4 @@
+from fountainai_openapi_parser.models import Reference
 from typing import Dict, Union from pydantic import RootModel
 class MediaType(BaseModel):
     schema_data: Optional[Union["Schema", Reference]] = None
