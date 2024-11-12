@@ -1,4 +1,4 @@
-from typing import Dict, Unionfrom pydantic import RootModel
+from typing import Dict, Union from pydantic import RootModel
 class Header(BaseModel):
     description: Optional[str] = None
     required: Optional[bool] = None

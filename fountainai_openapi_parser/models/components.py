@@ -1,4 +1,4 @@
-from typing import Dict, Unionfrom pydantic import RootModel
+from typing import Dict, Union from pydantic import RootModel
 class Components(BaseModel):
     schemas: Optional[Dict[str, Union[Schema, Reference]]] = None
     responses: Optional[Dict[str, Union[Response, Reference]]] = None
