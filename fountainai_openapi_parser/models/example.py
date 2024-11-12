@@ -1,11 +1,9 @@
-from typing import Dict, Union from pydantic import RootModel
+from typing import Optional, Any
+from pydantic import BaseModel, AnyUrl
+
 
 class Example(BaseModel):
-
-summary: Optional[str] = None
-
-description: Optional[str] = None
-
-value: Optional[Any] = None
-
-externalValue: Optional[AnyUrl] = None
+    summary: Optional[str] = None
+    description: Optional[str] = None
+    value: Optional[Any] = None
+    externalValue: Optional[AnyUrl] = None
