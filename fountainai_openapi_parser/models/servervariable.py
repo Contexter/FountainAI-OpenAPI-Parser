@@ -1,9 +1,8 @@
-from typing import Dict, Union from pydantic import RootModel
+from typing import Optional, List
+from pydantic import BaseModel
+
 
 class ServerVariable(BaseModel):
-
-enum: Optional[List[str]] = None
-
-default: str
-
-description: Optional[str] = None
+    enum: Optional[List[str]] = None
+    default: str
+    description: Optional[str] = None
