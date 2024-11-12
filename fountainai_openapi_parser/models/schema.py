@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class Schema(BaseModel):
     ref: Optional[str] = Field(default=None, alias="$ref")
 

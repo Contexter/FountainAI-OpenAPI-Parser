@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class Link(BaseModel):
     operationRef: Optional[str] = None
     operationId: Optional[str] = None

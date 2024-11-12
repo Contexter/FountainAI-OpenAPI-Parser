@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class SecuritySchemeType(str, Enum):
     API_KEY = "apiKey"
     HTTP = "http"

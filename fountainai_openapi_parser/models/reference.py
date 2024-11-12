@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class Reference(BaseModel):
     ref: str = Field(..., alias="$ref")
     summary: Optional[str] = None

@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class OpenAPI(BaseModel):
     openapi: str
     info: Info

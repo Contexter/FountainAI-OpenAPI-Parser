@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class MediaType(BaseModel):
     schema_data: Optional[Union["Schema", Reference]] = None
     example: Optional[Any] = None

@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class Parameter(BaseModel):
     name: str
     in_: ParameterLocation = Field(..., alias="in")

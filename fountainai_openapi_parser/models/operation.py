@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class Operation(BaseModel):
     tags: Optional[List[str]] = None
     summary: Optional[str] = None

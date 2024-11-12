@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class SecurityScheme(BaseModel):
     type: SecuritySchemeType
     description: Optional[str] = None

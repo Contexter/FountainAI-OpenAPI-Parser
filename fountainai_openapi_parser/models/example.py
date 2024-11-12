@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class Example(BaseModel):
     summary: Optional[str] = None
     description: Optional[str] = None

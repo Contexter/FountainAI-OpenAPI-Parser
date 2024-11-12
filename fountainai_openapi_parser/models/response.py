@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class Response(BaseModel):
     description: str
     headers: Optional[Dict[str, Union["Header", Reference]]] = None

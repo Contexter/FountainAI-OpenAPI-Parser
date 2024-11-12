@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class PathItem(BaseModel):
     ref: Optional[str] = Field(default=None, alias="$ref")
     summary: Optional[str] = None

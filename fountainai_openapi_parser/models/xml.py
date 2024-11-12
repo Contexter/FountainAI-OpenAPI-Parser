@@ -1,3 +1,4 @@
+from typing import Dict, Unionfrom pydantic import RootModel
 class XML(BaseModel):
     name: Optional[str] = None
     namespace: Optional[AnyUrl] = None
