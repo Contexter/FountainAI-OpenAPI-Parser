@@ -25,12 +25,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run Syntax Cleanup Script
+        run: |
+          # Run a Python script to clean up common syntax errors
+          python cleanup_syntax_errors.py
+
       - name: Auto-format and Lint Fix (Black, Flake8)
         run: |
           pip install black flake8
           black --line-length 100 fountainai_openapi_parser
           flake8 --exit-zero fountainai_openapi_parser --max-line-length=100 --ignore=E203,W503
-        # Note: `--exit-zero` ignores errors in Flake8 so that it only applies formatting without failing the job.
 
       - name: Run Type Checking (Mypy)
         run: |
@@ -52,5 +56,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git diff --quiet && echo "No changes to commit" || git commit -m "CI: Auto-format code with Black and apply lint fixes"
+          git diff --quiet && echo "No changes to commit" || git commit -m "CI: Auto-format code with Black and apply syntax fixes"
           git push
