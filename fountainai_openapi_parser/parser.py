@@ -1,3 +1,4 @@
+from .models.assemble import get_models
 import yaml
 import logging
 from typing import Any, Dict, Optional
